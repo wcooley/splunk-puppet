@@ -1,0 +1,38 @@
+[]
+access = read : [ * ], write : [ admin ]
+export = none
+
+[views/Puppet_Consistency]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony
+
+[views/Puppet_Information]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony
+
+[views/Puppet_Modulchanges]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony
+
+[views/Puppet_Modulestatistics]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony
+
+[views/Puppet_Readme]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony
+
+[views/Puppet_Updates]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony
+
+[views/Puppet_Withoutpuppetrun]
+access = read : [ * ], write : [ * ]
+export = none
+owner = simony

@@ -1,0 +1,10 @@
+<nav>
+    <view name="Puppet_Information" default='true'/>
+    <view name="Puppet_Consistency"/>
+    <view name="Puppet_Modulchanges"/>
+    <view name="Puppet_Modulestatistics"/>
+    <view name="Puppet_Updates"/>
+    <view name="Puppet_Withoutpuppetrun"/>
+    <view name="Puppet_Readme"/>
+    <view name="flashtimeline"/>
+</nav>

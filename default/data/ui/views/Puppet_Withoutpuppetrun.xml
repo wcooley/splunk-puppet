@@ -1,0 +1,44 @@
+<view template="dashboard.html">
+  <label>Without Puppetrun</label>
+
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+  <module name="TitleBar" layoutPanel="viewHeader">
+    <param name="actionsMenuFilter">dashboard</param>
+  </module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
+    <param name="src">puppet_withoutpuppetrun.html</param>
+</module>
+
+<module name="TimeRangePicker" layoutPanel="panel_row2_col1">
+	   <param name="selected">Last 24 Hours</param>
+		 <param name="searchWhenChanged">True</param>
+
+  <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
+    <param name="search">| inputlookup auto_serverlist.csv|dedup Alias  | search NOT [search index="*"  "Finished catalog run"|dedup hostname | eval Alias=hostname |fields Alias |format maxresults=10000]</param>
+    <param name="earliest">-7d</param>
+    <module name="Paginator">
+      <param name="count">10</param>
+      <param name="entityName">results</param>
+      <module name="ViewRedirectorLink" layoutPanel="panel_row2_col1_grp1">
+        <param name="viewTarget">flashtimeline</param>
+        <param name="label">View full results</param>
+      </module>
+      <module name="SimpleResultsTable">
+        <param name="drilldown">row</param>
+        <module name="ConvertToDrilldownSearch">
+          <module name="ViewRedirector">
+            <param name="viewTarget">flashtimeline</param>
+          </module>
+        </module>
+      </module>
+    </module>
+  </module>
+</module>
+</view>

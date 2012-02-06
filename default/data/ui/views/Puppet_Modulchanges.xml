@@ -1,0 +1,128 @@
+<view template="dashboard.html">
+  <label>Module Changes</label>
+
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+  <module name="TitleBar" layoutPanel="viewHeader">
+    <param name="actionsMenuFilter">dashboard</param>
+  </module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
+    <param name="src">puppet_hosts.html</param>
+</module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row2_col2">
+    <param name="src">puppet_environment.html</param>
+</module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row3_col1">
+    <param name="src">puppet_modulechanges.html</param>
+</module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row3_col2">
+    <param name="src">puppet_modulechanges.html</param>
+</module>
+
+  <module name="SearchSelectLister" layoutPanel="panel_row3_col1">
+         <param name="label">Hosts </param>
+         <param name="settingToCreate">host_setting</param>
+         <param name="search"> | inputlookup auto_serverlist.csv |fields+ Alias,OSName |search OSName=Solaris NOT Alias=*rpx* |sort Alias |uniq</param>
+         <param name="searchWhenChanged">True</param>
+         <param name="searchFieldsToDisplay">
+	<list>
+	      <param name="label">Alias</param>
+	      <param name="value">Alias</param>
+	</list>
+</param>      
+    <module name="ConvertToIntention">
+           <param name="settingToConvert">host_setting</param>
+           <param name="intention">
+           <param name="name">stringreplace</param>
+           <param name="arg">
+           <param name="hostname">
+           <param name="fillOnEmpty">True</param>
+           <param name="prefix">hostname=</param>
+           <param name="value">$target$</param>
+        </param>
+      </param>
+    </param>
+<module name="TimeRangePicker">
+   <param name="searchWhenChanged">True</param>
+   <param name="selected">Last 24 Hours</param>			
+               <module name="HiddenSearch" autoRun="True">
+                  <param name="search">index="*" $hostname$ puppetd changed NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields hostname puressource puchange</param>
+                  <module name="Paginator">
+                     <param name="count">30</param>
+                     <param name="entityName">results</param>
+                     <module name="ViewRedirectorLink">
+                        <param name="viewTarget">flashtimeline</param>
+                        <param name="label">View full results</param>
+                     </module>
+                     <module name="SimpleResultsTable">
+                        <param name="drilldown">row</param>
+                        <module name="ConvertToDrilldownSearch">
+                           <module name="ViewRedirector">
+                              <param name="viewTarget">flashtimeline</param>
+                           </module>
+                        </module>
+                     </module>
+                  </module>      
+              </module> 
+          </module>   
+         </module>
+     </module>
+
+   <module name="SearchSelectLister" layoutPanel="panel_row3_col2">
+         <param name="label">Environment </param>
+         <param name="settingToCreate">host_setting</param>
+         <param name="search"> | inputlookup serverlist_umgebung.csv | uniq</param>
+         <param name="searchWhenChanged">True</param>
+         <param name="searchFieldsToDisplay">
+	<list>
+	      <param name="label">label</param>
+	      <param name="value">alias</param>
+	</list>
+</param>      
+    <module name="ConvertToIntention">
+           <param name="settingToConvert">host_setting</param>
+           <param name="intention">
+           <param name="name">stringreplace</param>
+           <param name="arg">
+           <param name="hostname">
+           <param name="fillOnEmpty">True</param>
+           <param name="prefix">hostname=</param>
+           <param name="value">$target$</param>
+        </param>
+      </param>
+    </param>
+<module name="TimeRangePicker">
+   <param name="searchWhenChanged">True</param>
+   <param name="selected">Last 24 Hours</param>			
+               <module name="HiddenSearch" autoRun="True">
+                  <param name="search">index="*" $hostname$ puppetd changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields hostname puressource puchange</param>
+                  <module name="Paginator">
+                     <param name="count">30</param>
+                     <param name="entityName">results</param>
+                     <module name="ViewRedirectorLink">
+                        <param name="viewTarget">flashtimeline</param>
+                        <param name="label">View full results</param>
+                     </module>
+                     <module name="SimpleResultsTable">
+                        <param name="drilldown">row</param>
+                        <module name="ConvertToDrilldownSearch">
+                           <module name="ViewRedirector">
+                              <param name="viewTarget">flashtimeline</param>
+                           </module>
+                        </module>
+                     </module>
+                  </module>      
+              </module> 
+          </module>   
+         </module>
+     </module>
+ </view>

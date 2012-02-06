@@ -1,0 +1,217 @@
+<view template="dashboard.html">
+  <label>Consistency</label>
+
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+  <module name="TitleBar" layoutPanel="viewHeader">
+    <param name="actionsMenuFilter">dashboard</param>
+  </module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
+    <param name="src">puppet_hosts.html</param>
+</module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row2_col2">
+    <param name="src">puppet_environment.html</param>
+</module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row3_col1">
+    <param name="src">puppet_consistency.html</param>
+</module>
+
+<module name="ServerSideInclude" layoutPanel="panel_row3_col2">
+    <param name="src">puppet_consistency.html</param>
+</module>
+
+   <module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
+         <param name="label">Hosts </param>
+         <param name="settingToCreate">host_setting</param>
+         <param name="search"> | inputlookup auto_serverlist.csv |fields+ Alias,OSName |search OSName=Solaris NOT Alias=*rpx* |sort Alias |uniq</param>
+         <param name="searchWhenChanged">True</param>
+         <param name="searchFieldsToDisplay">
+	<list>
+	      <param name="label">Alias</param>
+	      <param name="value">Alias</param>
+	</list>
+</param>      
+    <module name="ConvertToIntention">
+           <param name="settingToConvert">host_setting</param>
+           <param name="intention">
+           <param name="name">stringreplace</param>
+           <param name="arg">
+           <param name="hostname">
+           <param name="fillOnEmpty">True</param>
+           <param name="prefix">hostname=</param>
+           <param name="value">$target$</param>
+        </param>
+      </param>
+    </param>
+<module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
+   <param name="searchWhenChanged">True</param>
+   <param name="selected">Last 24 Hours</param>
+<module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+    <module name="GenericHeader"><param name="label">Kernel Patch State</param></module>
+                  <param name="search">index="*" $hostname$ puppetd patchlevel | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-20 severe=20-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">Patch Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+          <param name="search">index="*" $hostname$ puppetd patchlevel | transaction hostname</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+
+<module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+    <module name="GenericHeader"><param name="label">Syslog Configuration</param></module>
+                  <param name="search">index="*" $hostname$ puppetd syslog checksum | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-9 severe=10-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">Syslog Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+      <param name="search">index="*" $hostname$ puppetd syslog checksum</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+
+    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+    <module name="GenericHeader"><param name="label">Fair Share Scheduler</param></module>
+                  <param name="search">index="*" $hostname$ puppetd fss failed | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-9 severe=10-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">FSS Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+          <param name="search">index="*" $hostname$ puppetd fss failed</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+
+    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+    <module name="GenericHeader"><param name="label">Network Mode (Speed und Duplex)</param></module>
+                  <param name="search">index="*" $hostname$ puppetd ((link failed) OR (speed failed) OR (duplex failed)) | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-9 severe=10-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">Netz Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+         <param name="search">index="*" $hostname$ puppetd ((link failed) OR (speed failed) OR (duplex failed))</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+    </module>
+    </module>
+    </module>
+
+<module name="SearchSelectLister" layoutPanel="panel_row3_col2_grp1">
+         <param name="label">Environment </param>
+         <param name="settingToCreate">host_setting</param>
+         <param name="search"> | inputlookup serverlist_umgebung.csv | uniq</param>
+         <param name="searchWhenChanged">True</param>
+         <param name="searchFieldsToDisplay">
+	<list>
+	      <param name="label">label</param>
+	      <param name="value">alias</param>
+	</list>
+</param>      
+    <module name="ConvertToIntention">
+           <param name="settingToConvert">host_setting</param>
+           <param name="intention">
+           <param name="name">stringreplace</param>
+           <param name="arg">
+           <param name="hostname">
+           <param name="fillOnEmpty">True</param>
+           <param name="prefix">hostname=</param>
+           <param name="value">$target$</param>
+        </param>
+      </param>
+    </param>
+<module name="TimeRangePicker" layoutPanel="panel_row3_col2_grp2">
+   <param name="searchWhenChanged">True</param>
+   <param name="selected">Last 24 Hours</param>
+<module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+    <module name="GenericHeader"><param name="label">Kernel Patch State</param></module>
+                  <param name="search">index="*" $hostname$ puppetd patchlevel | transaction hostname | stats count(sourcetype) | rangemap field=count(sourcetype) low=0-0 elevated=1-20 severe=20-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">Patch Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
+      <param name="search">index="*" $hostname$ puppetd patchlevel | transaction hostname</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+
+
+<module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+    <module name="GenericHeader"><param name="label">Syslog Configuration</param></module>
+                  <param name="search">index="*" $hostname$ puppetd syslog checksum | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-9 severe=10-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">Syslog Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
+      <param name="search">index="*" $hostname$ puppetd syslog checksum</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+
+    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+    <module name="GenericHeader"><param name="label">Fair Share Scheduler</param></module>
+                  <param name="search">index="*" $hostname$ puppetd fss failed | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-9 severe=10-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">FSS Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
+          <param name="search">index="*" $hostname$ puppetd fss failed</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+
+    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+    <module name="GenericHeader"><param name="label">Network Mode (Speed und Duplex)</param></module>
+                  <param name="search">index="*" $hostname$ puppetd ((link failed) OR (speed failed) OR (duplex failed)) | transaction hostname | stats count(sourcetype) |  rangemap field=count(sourcetype) low=0-0 elevated=1-9 severe=10-10000 default=low</param>
+    <module name="SingleValue">
+                  <param name="classField">range</param>
+                  <param name="afterLabel">Netz Error</param>
+    </module>
+    </module>
+    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
+          <param name="search">index="*" $hostname$ puppetd ((link failed) OR (speed failed) OR (duplex failed))</param>
+    <module name="ViewRedirectorLink">
+                                <param name="viewTarget">flashtimeline</param>
+                                <param name="label">View full results</param>
+    </module>
+    </module>
+    </module>
+    </module>
+    </module>
+</view>

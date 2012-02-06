@@ -1,0 +1,227 @@
+/* Basic Typography
+-------------------------------------------------------------------------------------------------------------*/
+
+body, td {
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    color: #111;
+}
+
+input, textarea, select {
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    color: #333;
+}
+
+.splHeader-dashboard h2,
+.dashboardContent .ServerSideInclude h2,
+.dashboardContent .GenericHeader h3 {
+    color: #888888;
+    margin-left: 0px;
+    padding: 0;
+    margin: 0 0 10px 0;
+    height: auto;
+}
+
+/* App header elements
+-------------------------------------------------------------------------------------------------------------*/
+
+.appLogo {
+    height: 54px;
+    width: 142px;
+    background-image: url(pictures/appLogo_puppet.png);
+    background-repeat: no-repeat;
+}
+
+/* the name of your app. line height can be adjusted to fix alignment 
+issues w/ the logo. color is the color of the text. if your logo has 
+the name in it, then you can set this to "display:none;  */
+
+.appHeaderWrapper h1 {
+    display:none;
+}
+
+/* background-color and/or image of your app */
+
+.appHeaderWrapper {
+    background-image: url(pictures/background_appheader.png);
+    background-repeat: repeat-x;
+    background-position: top;
+    border-bottom-style: ;
+    border-bottom-width: ;
+    border-bottom-color: ;
+}
+
+/* loader background */
+
+#loading {
+    background-color: #f0d68d;
+}
+
+/* color of top-right text */
+
+.appHeaderWrapper {
+    color: #FFFFFF;
+}
+
+/* nav bar and aux links
+-------------------------------------------------------------------------------------------------------------*/
+
+.splHeader-navigation {
+    background-image: url(pictures/background_header.png);
+    background-repeat: repeat-x;
+}
+
+/* to change arrows, see Menu section, below */
+
+/* auxiliary text and links */
+
+.AppBar .auxLinks a {
+    color: #ffffff;
+}
+
+/* Menus
+-------------------------------------------------------------------------------------------------------------*/
+
+/* primary menu */
+
+.splMenu-primary ul {
+    background-color: #fff6e5;
+}
+.splMenu-primary, .splMenu-primary a, .splMenu-primary a:visited, .splMenu-primary a:hover {
+    color: #91510f;
+}
+.splMenu-primary li:hover {
+    background-color: #ffffff;
+}
+
+/* secondary menu, used for apps pulldown */
+
+.splMenu-secondary ul {
+    background-color: #fff6e5;
+}
+.splMenu-secondary, .splMenu-secondary a {
+    color: #91510f;
+}
+.splMenu-secondary li.disabled a {
+    color: #ffffff;
+}   
+.splMenu-secondary li:hover {
+    background-color: #ffffff;
+}
+.splMenu-secondary a:hover {
+    color: #91510f;   
+}
+
+/* background colors
+-------------------------------------------------------------------------------------------------------------*/
+
+/* default page color */
+
+body, .splBackground-default,
+.graphArea, .resultsArea,
+.reportSecondPanel, .reportThirdPanel,
+.sidebarCollapsed,
+.SearchBar .saTypeaheadWrapper,
+.ui-datepicker-links,
+.popupContent,
+.SearchBar .assistantContainer {
+    background-color: #fff6e5;
+}
+
+/* primary background - applies to search controls and primary action panels */
+
+.viewHeader, .mainSearchControls, .splSearchControls-inline,
+.SearchBar .saHelpWrapper,
+.popupContent  {
+    background-image:url(pictures/background_dashboard.png);
+    background-repeat:repeat;
+}
+
+/* secondary background - sidebar, other panels */
+
+.splBackground-secondary, .sidebarExpanded,
+.fieldValuePopup p.reportLinks {
+    background-image:url(pictures/background_dashboard.png);
+    background-repeat:repeat;
+}
+
+/* dashboard background color */
+
+body.splTemplate-dashboard {
+    background-image:url(pictures/background_dashboard.png);
+    background-repeat:repeat;
+}
+
+/* dashboard containers */
+
+.dashboardCell {
+   background-color: #fff6e5;
+}
+
+/* headers 
+-------------------------------------------------------------------------------------------------------------*/
+
+/* primary header background color + overlay */
+
+.splHeader-primary,
+.TitleBar .splHeader,
+.FieldPickerPopup .splHeader-primary {
+background-image:url(pictures/background_dashboard.png);
+background-repeat:repeat-x;
+}
+
+/* secondary (i.e. sidebar) header background color + overlay */
+
+.splHeader-secondary {
+    background-image: url(pictures/background_header.png);
+    background-repeat: repeat-x;
+}
+
+/* headers w/o any overlay */
+
+.FlashTimeline .splHeader-primary {
+    background-color: #fff6e5;
+    background-image: none;
+}
+
+/* search controls 
+-------------------------------------------------------------------------------------------------------------*/
+
+/* search button color*/
+
+input.searchButton {
+    background-color: #363149;
+    background-position:-40px 0;   
+}
+
+.SearchBar .assistantActivator {
+    background-color: #96551d;
+}
+
+/* Flash timeline and charts 
+-------------------------------------------------------------------------------------------------------------*/
+
+div.FlashChart {
+    background-color: #fff6e5;
+}
+
+/* flash timeline specific */
+
+div.FlashTimeline {
+    background-color: #fff6e5;
+    border-left-color: ;
+    color: ;
+    border-right-color: #363149;
+}
+
+/* buttons
+-------------------------------------------------------------------------------------------------------------*/
+
+.splButton-primary {
+    background-color: #363149;
+    color: ;
+}
+.splButton-primary:hover {
+    background-color: #8278a6;
+}
