@@ -1,10 +1,21 @@
 <nav>
     <view name="Puppet_Information" default='true'/>
+    <view name="flashtimeline"/>
     <view name="Puppet_Consistency"/>
     <view name="Puppet_Modulchanges"/>
     <view name="Puppet_Modulestatistics"/>
     <view name="Puppet_Updates"/>
     <view name="Puppet_Withoutpuppetrun"/>
-    <view name="Puppet_Readme"/>
-    <view name="flashtimeline"/>
+  <collection label="Views">
+    <view name="charting" />
+    <divider />
+    <view source="unclassified" />
+    <divider />
+    <a href="/manager/Puppet/data/ui/views">Manage Views</a>
+    <divider />
+    <a href="javascript:Splunk.Globals.Viewmaster.openDashCreateForm();">Create dashboard...</a>
+  </collection>
+    <collection label="Searches &amp; Reports">
+        <saved source="unclassified" />
+    </collection>
 </nav>
