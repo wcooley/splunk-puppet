@@ -17,8 +17,8 @@
 </module>
 
 <module name="TimeRangePicker" layoutPanel="panel_row2_col1">
-	   <param name="selected">Last 24 Hours</param>
-		 <param name="searchWhenChanged">True</param>
+           <param name="selected">Last 24 Hours</param>
+                 <param name="searchWhenChanged">True</param>
 
   <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
     <param name="search">| inputlookup auto_serverlist.csv|dedup Alias  | search NOT [search index="*"  "Finished catalog run"|dedup hostname | eval Alias=hostname |fields Alias |format maxresults=10000]</param>

@@ -34,11 +34,11 @@
          <param name="search"> | inputlookup auto_serverlist.csv |fields+ Alias,OSName |search OSName=Solaris NOT Alias=*rpx* |sort Alias |uniq</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
-	<list>
-	      <param name="label">Alias</param>
-	      <param name="value">Alias</param>
-	</list>
-</param>      
+        <list>
+              <param name="label">Alias</param>
+              <param name="value">Alias</param>
+        </list>
+</param>
     <module name="ConvertToIntention">
            <param name="settingToConvert">host_setting</param>
            <param name="intention">
@@ -159,11 +159,11 @@
          <param name="search"> | inputlookup serverlist_umgebung.csv | uniq</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
-	<list>
-	      <param name="label">label</param>
-	      <param name="value">alias</param>
-	</list>
-</param>      
+        <list>
+              <param name="label">label</param>
+              <param name="value">alias</param>
+        </list>
+</param>
     <module name="ConvertToIntention">
            <param name="settingToConvert">host_setting</param>
            <param name="intention">
