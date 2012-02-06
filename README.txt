@@ -1,4 +1,15 @@
 
+**************************************
+
+This is a copy of the Puppet app that is available from Splunkbase:
+
+http://splunk-base.splunk.com/apps/Splunk+for+Puppet+Configuration+Management
+
+This is not the original source!
+
+Wil Cooley <wcooley@pdx.edu>
+**************************************
+
 #####Welcome to the Puppet Dashboard#####
 
 #The meaning and purpose of this app is to give you a glimpse on some of the enhanced features in 
@@ -36,3 +47,5 @@
 
 #The different views are self explanatory. The necessary information to understand the views is 
 #directly on each view. Check them out and you will see what they do.
+
+
