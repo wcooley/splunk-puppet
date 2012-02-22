@@ -33,22 +33,22 @@
 <module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
          <param name="label">Hosts </param>
          <param name="settingToCreate">host_setting</param>
-         <param name="search"> | inputlookup auto_serverlist.csv |fields+ Alias,OSName |search OSName=Solaris NOT Alias=*rpx* |sort Alias |uniq</param>
+         <param name="search">| gendershosts</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
-        <list>
-              <param name="label">Alias</param>
-              <param name="value">Alias</param>
-        </list>
+	<list>
+	      <param name="label">host</param>
+	      <param name="value">host</param>
+	</list>
 </param>
     <module name="ConvertToIntention">
            <param name="settingToConvert">host_setting</param>
            <param name="intention">
            <param name="name">stringreplace</param>
            <param name="arg">
-           <param name="hostname">
+           <param name="host">
            <param name="fillOnEmpty">True</param>
-           <param name="prefix">hostname=</param>
+           <param name="prefix">host=</param>
            <param name="value">$target$</param>
         </param>
       </param>
@@ -59,13 +59,13 @@
    <param name="selected">Last 24 Hours</param>
 <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
     <module name="GenericHeader"><param name="label">Last Puppetrun</param></module>
-                  <param name="search">index="*" $hostname$ puppetd run catalog in | eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S") | table mytime </param>
+                  <param name="search"> $host$ puppetd run catalog in | eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S") | table mytime </param>
     <module name="SingleValue">
                   <param name="format">none</param>
     </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search">index="*" $hostname$ puppetd run catalog in</param>
+         <param name="search"> $host$ puppetd run catalog in</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -75,14 +75,14 @@
 
       <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
         <module name="GenericHeader"><param name="label">Puppet Error</param></module>
-        <param name="search">index="*" $hostname$ puppetd error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
+        <param name="search"> $host$ puppetd error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
         <module name="SingleValue">
           <param name="field">count</param>
           <param name="classField">range</param>
         </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search">index="*" $hostname$ puppetd error</param>
+         <param name="search"> $host$ puppetd error</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -92,13 +92,13 @@
 
 <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
     <module name="GenericHeader"><param name="label">Duration of Puppetrun</param></module>
-                  <param name="search">index="*" $hostname$ puppetd Finished run in seconds | rex "run in (?&lt;seconds&gt;.*) seconds" | table seconds</param>
+                  <param name="search"> $host$ puppetd Finished run in seconds | rex "run in (?&lt;seconds&gt;.*) seconds" | table seconds</param>
     <module name="SingleValue">
                   <param name="afterLabel">seconds</param>
     </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search">index="*" $hostname$ puppetd Finished run in seconds</param>
+         <param name="search"> $host$ puppetd Finished run in seconds</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -108,14 +108,14 @@
 
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
     <module name="GenericHeader"><param name="label">Puppet Version</param></module>
-                  <param name="search">$hostname$ index="*" puppetd puppetversion version returns NOT "executed" | rex "\(//puppetversion/Exec\[version\]/returns\) (?&lt;version&gt;.*)" | table version</param>
+                  <param name="search">$host$  puppetd puppetversion version returns NOT "executed" | rex "\(//puppetversion/Exec\[version\]/returns\) (?&lt;version&gt;.*)" | table version</param>
     <module name="SingleValue">
                   <param name="format">none</param>
     </module>
     </module>
 
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search">index="*" $hostname$ puppetd puppetversion version returns NOT "executed"</param>
+         <param name="search"> $host$ puppetd puppetversion version returns NOT "executed"</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -125,65 +125,34 @@
     </module>
     </module>
 
-<module name="SearchSelectLister" layoutPanel="panel_row3_col2_grp1">
-         <param name="label">Environment </param>
-         <param name="settingToCreate">host_setting</param>
-         <param name="search"> | inputlookup serverlist_umgebung.csv | uniq</param>
-         <param name="searchWhenChanged">True</param>
-         <param name="searchFieldsToDisplay">
-        <list>
-              <param name="label">label</param>
-              <param name="value">alias</param>
-        </list>
-</param>
-    <module name="ConvertToIntention">
-           <param name="settingToConvert">host_setting</param>
-           <param name="intention">
-           <param name="name">stringreplace</param>
-           <param name="arg">
-           <param name="hostname">
-           <param name="fillOnEmpty">True</param>
-           <param name="prefix">hostname=</param>
-           <param name="value">$target$</param>
-        </param>
-      </param>
-    </param>
-<module name="TimeRangePicker" layoutPanel="panel_row3_col2_grp2">
-   <param name="searchWhenChanged">True</param>
-   <param name="selected">Last 24 Hours</param>
-
-      <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
-        <module name="GenericHeader"><param name="label">Puppet Error</param></module>
-        <param name="search">index="*" $hostname$ puppetd error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
-        <module name="SingleValue">
-          <param name="field">count</param>
-          <param name="classField">range</param>
+ <module name="HiddenSavedSearch" layoutPanel="panel_row3_col2" group="Puppet Errors By Host" autoRun="True">
+    <param name="savedSearch">Puppet Errors By Host</param>
+    <param name="groupLabel">Puppet Errors By Host</param>
+    <module name="ViewstateAdapter">
+      <param name="savedSearch">Puppet Errors By Host</param>
+      <module name="HiddenFieldPicker">
+        <param name="strictMode">True</param>
+        <module name="JobProgressIndicator">
+          <module name="EnablePreview">
+            <param name="enable">True</param>
+            <param name="display">False</param>
+            <module name="HiddenChartFormatter">
+              <module name="FlashChart">
+                <param name="width">100%</param>
+                <module name="ConvertToDrilldownSearch">
+                  <module name="ViewRedirector">
+                    <param name="viewTarget">flashtimeline</param>
+                  </module>
+                </module>
+              </module>
+              <module name="ViewRedirectorLink">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
+            </module>
+          </module>
         </module>
+      </module>
     </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
-         <param name="search">index="*" $hostname$ puppetd error </param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
+  </module>
 
-      <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
-        <module name="GenericHeader"><param name="label">SSL Error</param></module>
-        <param name="search">index="*" $hostname$ puppetd error ssl| stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
-        <module name="SingleValue">
-          <param name="field">count</param>
-          <param name="classField">range</param>
-        </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
-         <param name="search">index="*" $hostname$ puppetd error ssl</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-    </module>
-    </module>
-    </module>
 </view>

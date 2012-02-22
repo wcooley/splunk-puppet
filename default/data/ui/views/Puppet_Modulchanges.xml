@@ -31,31 +31,31 @@
   <module name="SearchSelectLister" layoutPanel="panel_row3_col1">
          <param name="label">Hosts </param>
          <param name="settingToCreate">host_setting</param>
-         <param name="search"> | inputlookup auto_serverlist.csv |fields+ Alias,OSName |search OSName=Solaris NOT Alias=*rpx* |sort Alias |uniq</param>
+         <param name="search">|gendershosts</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
-        <list>
-              <param name="label">Alias</param>
-              <param name="value">Alias</param>
-        </list>
+	<list>
+	      <param name="label">host</param>
+	      <param name="value">host</param>
+	</list>
 </param>
     <module name="ConvertToIntention">
            <param name="settingToConvert">host_setting</param>
            <param name="intention">
            <param name="name">stringreplace</param>
            <param name="arg">
-           <param name="hostname">
+           <param name="host">
            <param name="fillOnEmpty">True</param>
-           <param name="prefix">hostname=</param>
+           <param name="prefix">host=</param>
            <param name="value">$target$</param>
         </param>
       </param>
     </param>
 <module name="TimeRangePicker">
    <param name="searchWhenChanged">True</param>
-   <param name="selected">Last 24 Hours</param>
+   <param name="selected">Last 24 Hours</param>			
                <module name="HiddenSearch" autoRun="True">
-                  <param name="search">index="*" $hostname$ puppetd changed NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields hostname puressource puchange</param>
+                  <param name="search"> $host$ puppetd changed NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
                   <module name="Paginator">
                      <param name="count">30</param>
                      <param name="entityName">results</param>
@@ -80,31 +80,31 @@
    <module name="SearchSelectLister" layoutPanel="panel_row3_col2">
          <param name="label">Environment </param>
          <param name="settingToCreate">host_setting</param>
-         <param name="search"> | inputlookup serverlist_umgebung.csv | uniq</param>
+         <param name="search">|gendershosts</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
-        <list>
-              <param name="label">label</param>
-              <param name="value">alias</param>
-        </list>
+	<list>
+	      <param name="label">host</param>
+	      <param name="value">host</param>
+	</list>
 </param>
     <module name="ConvertToIntention">
            <param name="settingToConvert">host_setting</param>
            <param name="intention">
            <param name="name">stringreplace</param>
            <param name="arg">
-           <param name="hostname">
+           <param name="host">
            <param name="fillOnEmpty">True</param>
-           <param name="prefix">hostname=</param>
+           <param name="prefix">host=</param>
            <param name="value">$target$</param>
         </param>
       </param>
     </param>
 <module name="TimeRangePicker">
    <param name="searchWhenChanged">True</param>
-   <param name="selected">Last 24 Hours</param>
+   <param name="selected">Last 24 Hours</param>			
                <module name="HiddenSearch" autoRun="True">
-                  <param name="search">index="*" $hostname$ puppetd changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields hostname puressource puchange</param>
+                  <param name="search"> $host$ puppetd changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
                   <module name="Paginator">
                      <param name="count">30</param>
                      <param name="entityName">results</param>
