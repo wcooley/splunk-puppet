@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<dashboard>
+  <label>Puppet Errors</label>
+  <row>
+    <chart>
+      <searchName>Puppet Errors By Host</searchName>
+      <title>Puppet Errors By Host</title>
+    </chart>
+  </row>
+</dashboard>
