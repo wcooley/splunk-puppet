@@ -33,7 +33,7 @@
 <module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
          <param name="label">Hosts </param>
          <param name="settingToCreate">host_setting</param>
-         <param name="search">| gendershosts</param>
+         <param name="search">| `puppet_hosts`</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
 	<list>
@@ -59,13 +59,13 @@
    <param name="selected">Last 24 Hours</param>
 <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
     <module name="GenericHeader"><param name="label">Last Puppetrun</param></module>
-                  <param name="search"> $host$ puppetd run catalog in | eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S") | table mytime </param>
+                  <param name="search"> $host$ `puppet_logs` `puppet_agent` run catalog in | eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S") | table mytime </param>
     <module name="SingleValue">
                   <param name="format">none</param>
     </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search"> $host$ puppetd run catalog in</param>
+         <param name="search"> $host$ `puppet_logs` `puppet_agent` run catalog in</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -75,14 +75,14 @@
 
       <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
         <module name="GenericHeader"><param name="label">Puppet Error</param></module>
-        <param name="search"> $host$ puppetd error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
+        <param name="search"> $host$ `puppet_logs` `puppet_agent` error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
         <module name="SingleValue">
           <param name="field">count</param>
           <param name="classField">range</param>
         </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search"> $host$ puppetd error</param>
+         <param name="search"> $host$ `puppet_logs` `puppet_agent` error</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -92,13 +92,13 @@
 
 <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
     <module name="GenericHeader"><param name="label">Duration of Puppetrun</param></module>
-                  <param name="search"> $host$ puppetd Finished run in seconds | rex "run in (?&lt;seconds&gt;.*) seconds" | table seconds</param>
+                  <param name="search">`puppet_agent_run_time($host$)`| rename puppet_catalog_run_time AS seconds| table seconds</param>
     <module name="SingleValue">
                   <param name="afterLabel">seconds</param>
     </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search"> $host$ puppetd Finished run in seconds</param>
+         <param name="search">`puppet_agent_run_time($host$)`</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -108,14 +108,15 @@
 
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
     <module name="GenericHeader"><param name="label">Puppet Version</param></module>
-                  <param name="search">$host$  puppetd puppetversion version returns NOT "executed" | rex "\(//puppetversion/Exec\[version\]/returns\) (?&lt;version&gt;.*)" | table version</param>
+                  <param name="search">node=$host$  `puppet_version`| table version</param>
     <module name="SingleValue">
+                  <param name="field">version</param>
                   <param name="format">none</param>
     </module>
     </module>
 
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search"> $host$ puppetd puppetversion version returns NOT "executed"</param>
+         <param name="search">node=$host$ `puppet_version`</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -137,6 +138,7 @@
             <param name="enable">True</param>
             <param name="display">False</param>
             <module name="HiddenChartFormatter">
+              <param name="chart">pie</param>
               <module name="FlashChart">
                 <param name="width">100%</param>
                 <module name="ConvertToDrilldownSearch">
