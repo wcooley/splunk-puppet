@@ -31,7 +31,7 @@
   <module name="SearchSelectLister" layoutPanel="panel_row3_col1">
          <param name="label">Hosts </param>
          <param name="settingToCreate">host_setting</param>
-         <param name="search">|gendershosts</param>
+         <param name="search">|`puppet_hosts`</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
 	<list>
@@ -55,7 +55,7 @@
    <param name="searchWhenChanged">True</param>
    <param name="selected">Last 24 Hours</param>			
                <module name="HiddenSearch" autoRun="True">
-                  <param name="search"> $host$ puppetd changed NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
+                  <param name="search"> $host$ `puppet_logs` `puppet_agent` changed NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
                   <module name="Paginator">
                      <param name="count">30</param>
                      <param name="entityName">results</param>
@@ -80,7 +80,7 @@
    <module name="SearchSelectLister" layoutPanel="panel_row3_col2">
          <param name="label">Environment </param>
          <param name="settingToCreate">host_setting</param>
-         <param name="search">|gendershosts</param>
+         <param name="search">|`puppet_hosts`</param>
          <param name="searchWhenChanged">True</param>
          <param name="searchFieldsToDisplay">
 	<list>
@@ -104,7 +104,7 @@
    <param name="searchWhenChanged">True</param>
    <param name="selected">Last 24 Hours</param>			
                <module name="HiddenSearch" autoRun="True">
-                  <param name="search"> $host$ puppetd changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
+                  <param name="search"> $host$ `puppet_logs` `puppet_agent` changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
                   <module name="Paginator">
                      <param name="count">30</param>
                      <param name="entityName">results</param>

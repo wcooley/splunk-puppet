@@ -31,7 +31,7 @@
      			
 		 <!-- Top Ressources -->
 		 <module name="HiddenSearch" layoutPanel="panel_row2_col1">
-		    <param name="search"> puppetd changed  NOT "*.rb"|rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top puressource limit=10</param>
+		    <param name="search"> `puppet_logs` `puppet_agent` changed  NOT "*.rb"|rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top puressource limit=10</param>
 				<param name="autoRun">true</param>	
         				
 			  <!-- Top Ressources Chart -->
@@ -62,7 +62,7 @@
 			<!-- What changed -->
       <module name="HiddenSearch" layoutPanel="panel_row3_col1">
 		     <param name="autoRun">true</param>
-		     <param name="search"> puppetd changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top puchange limit=10</param>
+		     <param name="search"> `puppet_logs` `puppet_agent` changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top puchange limit=10</param>
 										
 				 <!-- What changed Chart -->
 			   <module name="GenericHeader"><param name="label">Puppet - What changed</param></module>
@@ -91,7 +91,7 @@
 			<!-- Top hosts -->
       <module name="HiddenSearch" layoutPanel="panel_row4_col1">
 		     <param name="autoRun">true</param>
-		     <param name="search"> puppetd changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top host limit=10</param>
+		     <param name="search"> `puppet_logs` `puppet_agent` changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top host limit=10</param>
 										
 				 <!-- What changed Chart -->
 			   <module name="GenericHeader"><param name="label">Puppet - Hosts with changes</param></module>
