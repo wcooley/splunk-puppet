@@ -21,7 +21,7 @@
 		 <param name="searchWhenChanged">True</param>
 
   <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
-      <param name="search">`puppet_logs` [`puppet_hosts`]| search NOT [search "Finished catalog run" `puppet_logs`|dedup host|fields host|fields - _*|format maxresults=10000]|table host</param>
+      <param name="search">eventtype=puppet [`puppet_hosts`]| search NOT [search "Finished catalog run" eventtype=puppet|dedup host|fields host|fields - _*|format maxresults=10000]|table host</param>
     <param name="earliest">-24h@h</param>
     <module name="Paginator">
       <param name="count">30</param>
@@ -33,7 +33,7 @@
       <module name="SimpleResultsTable">
           <param name="drilldown">row</param>
           <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
-              <param name="search">`puppet_logs`|table host</param>
+              <param name="search">eventtype=puppet|table host</param>
             <module name="ConvertToDrilldownSearch">
                 <module name="ViewRedirector">
                     <param name="viewTarget">flashtimeline</param>
@@ -50,7 +50,7 @@
 </module>
 
 <module name="HiddenSearch" layoutPanel="panel_row2_col2" autoRun="True">
-    <param name="search">`puppet_logs` "Run of Puppet configuration client already in progress; skipping" OR "Finished catalog run"| dedup host sortby +host| search NOT "Finished catalog run"| table host</param>
+    <param name="search">eventtype=puppet "Run of Puppet configuration client already in progress; skipping" OR "Finished catalog run"| dedup host sortby +host| search NOT "Finished catalog run"| table host</param>
     <param name="earliest">-2h@h</param>
     <param name="latest">-5m@m</param>
     <module name="Paginator">

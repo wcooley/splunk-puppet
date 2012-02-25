@@ -40,7 +40,7 @@
 	      <param name="label">host</param>
 	      <param name="value">host</param>
 	</list>
-</param>
+        </param>
     <module name="ConvertToIntention">
            <param name="settingToConvert">host_setting</param>
            <param name="intention">
@@ -48,7 +48,6 @@
            <param name="arg">
            <param name="host">
            <param name="fillOnEmpty">True</param>
-           <param name="prefix">host=</param>
            <param name="value">$target$</param>
         </param>
       </param>
@@ -59,13 +58,13 @@
    <param name="selected">Last 24 Hours</param>
 <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
     <module name="GenericHeader"><param name="label">Last Puppetrun</param></module>
-                  <param name="search"> $host$ `puppet_logs` `puppet_agent` run catalog in | eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S") | table mytime </param>
+                  <param name="search"> $host$ eventtype=puppet_agent run catalog in | eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S") | table mytime </param>
     <module name="SingleValue">
                   <param name="format">none</param>
     </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search"> $host$ `puppet_logs` `puppet_agent` run catalog in</param>
+         <param name="search"> $host$ eventtype=puppet_agent run catalog in</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
@@ -75,14 +74,14 @@
 
       <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
         <module name="GenericHeader"><param name="label">Puppet Error</param></module>
-        <param name="search"> $host$ `puppet_logs` `puppet_agent` error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
+        <param name="search"> $host$ eventtype=puppet_agent error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
         <module name="SingleValue">
           <param name="field">count</param>
           <param name="classField">range</param>
         </module>
     </module>
     <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search"> $host$ `puppet_logs` `puppet_agent` error</param>
+         <param name="search"> $host$ eventtype=puppet_agent error</param>
     <module name="ViewRedirectorLink">
                                 <param name="viewTarget">flashtimeline</param>
                                 <param name="label">View full results</param>
