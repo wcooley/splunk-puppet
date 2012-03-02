@@ -30,12 +30,12 @@
 		 <param name="searchWhenChanged">True</param>
      			
 		 <!-- Top Resources -->
-		 <module name="HiddenSearch" layoutPanel="panel_row2_col1">
-		    <param name="search"> eventtype=puppet_agent changed NOT noop | fields puppet_resource_type|top puppet_resource_type limit=10</param>
+		 <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1">
+		    <param name="savedSearch">puppet_changes_by_resource_type</param>
 				<param name="autoRun">true</param>	
         				
 			  <!-- Top Resources Chart -->
-				<module name="GenericHeader"><param name="label">Resources Types Changed</param></module>
+				<module name="GenericHeader"><param name="label">Changes by Resource Type</param></module>
 				<module name="JobProgressIndicator" />
 				<module name="HiddenChartFormatter">						
 				   <param name="chart">pie</param>
@@ -60,12 +60,12 @@
          <param name="searchWhenChanged">True</param>
 				
 			<!-- What changed -->
-      <module name="HiddenSearch" layoutPanel="panel_row3_col1">
+      <module name="HiddenSavedSearch" layoutPanel="panel_row3_col1">
 		     <param name="autoRun">true</param>
-		     <param name="search"> eventtype=puppet_agent changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top puchange limit=10</param>
+		     <param name="savedSearch">puppet_changes_by_class</param>
 										
 				 <!-- What changed Chart -->
-			   <module name="GenericHeader"><param name="label">Puppet - What changed</param></module>
+			   <module name="GenericHeader"><param name="label">Changes by Class</param></module>
 				 <module name="JobProgressIndicator" />
 			   <module name="HiddenChartFormatter">
 				    <param name="chart">pie</param>
@@ -89,12 +89,12 @@
          <param name="searchWhenChanged">True</param>	
 
 			<!-- Top hosts -->
-      <module name="HiddenSearch" layoutPanel="panel_row4_col1">
+      <module name="HiddenSavedSearch" layoutPanel="panel_row4_col1">
 		     <param name="autoRun">true</param>
-		     <param name="search"> eventtype=puppet_agent changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 3000 | fields host puressource puchange | top host limit=10</param>
+                     <param name="savedSearch">puppet_changes_by_host</param>
 										
 				 <!-- What changed Chart -->
-			   <module name="GenericHeader"><param name="label">Puppet - Hosts with changes</param></module>
+			   <module name="GenericHeader"><param name="label">Changes by Host</param></module>
 				 <module name="JobProgressIndicator" />
 			   <module name="HiddenChartFormatter">
 				    <param name="chart">pie</param>

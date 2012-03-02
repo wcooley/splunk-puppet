@@ -1,5 +1,5 @@
 <view template="dashboard.html">
-  <label>Without Puppet Run</label>
+  <label>Agent Run Anomalies</label>
 
   <module name="AccountBar" layoutPanel="appHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
@@ -16,13 +16,8 @@
     <param name="src">puppet_withoutpuppetrun.html</param>
 </module>
 
-<module name="TimeRangePicker" layoutPanel="panel_row2_col1">
-	   <param name="selected">Last 24 Hours</param>
-		 <param name="searchWhenChanged">True</param>
-
-  <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
-      <param name="search">eventtype=puppet [`puppet_hosts`]| search NOT [search "Finished catalog run" eventtype=puppet|dedup host|fields host|fields - _*|format maxresults=10000]|table host</param>
-    <param name="earliest">-24h@h</param>
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" autoRun="True">
+      <param name="savedSearch">hosts_without_successful_run</param>
     <module name="Paginator">
       <param name="count">30</param>
       <param name="entityName">results</param>
@@ -43,27 +38,74 @@
         </module>
     </module>
   </module>
-</module>
 
 <module name="GenericHeader" layoutPanel="panel_row2_col2">
-    <param name="label">Hosts where Puppet appears to be disabled</param>
+    <param name="label">Agent Run Times</param>
+
+    <module name="GenericHeader">
+        <param name="label">Average &amp; Standard Deviation</param>
+    </module>
+
+    <module name="StaticContentSample">
+        <param name="text">Average and standard deviation of Puppet agent
+            run-times, in seconds.</param>
+    </module>
+        <module name="HiddenSearch" autoRun="True">
+            <param name="search">|savedsearch puppet_agent_run_time_avg_30m|eval query=round(query,2) |rename query AS Average|appendcols [|savedsearch puppet_agent_run_time_stdev_30m|eval query=round(query,2)|rename query AS "Standard Deviation"]</param>
+            <module name="SimpleResultsTable">
+                <param name="displayRowNumbers">false</param>
+            </module>
+        </module>
+
+    <module name="GenericHeader">
+        <param name="label">Long Agent Runs</param>
+    </module>
+
+        <module name="HiddenSavedSearch" autoRun="True">
+            <param name="savedSearch">puppet_run_times_greater_than_1_stdev</param>
+
+            <module name="Paginator">
+                <param name="count">30</param>
+                <param name="entityName">results</param>
+                <module name="SimpleResultsTable">
+                    <param name="entityName">results</param>
+                    <param name="drilldown">row</param>
+                    <module name="ConvertToDrilldownSearch">
+                        <module name="ViewRedirector">
+                            <param name="viewTarget">flashtimeline</param>
+                        </module>
+                    </module>
+                </module>
+                <module name="ViewRedirectorLink">
+                    <param name="viewTarget">flashtimeline</param>
+                    <param name="label">View full results</param>
+                </module>
+            </module>
+        </module>
 </module>
 
-<module name="HiddenSearch" layoutPanel="panel_row2_col2" autoRun="True">
-    <param name="search">eventtype=puppet "Run of Puppet configuration client already in progress; skipping" OR "Finished catalog run"| dedup host sortby +host| search NOT "Finished catalog run"| table host</param>
-    <param name="earliest">-2h@h</param>
-    <param name="latest">-5m@m</param>
+<module name="GenericHeader" layoutPanel="panel_row2_col3">
+    <param name="label">Something Else Here</param>
+</module>
+
+<module name="GenericHeader" layoutPanel="panel_row3_col1">
+    <param name="label">Hosts where Puppet agent is disabled</param>
+</module>
+
+<module name="HiddenSavedSearch" layoutPanel="panel_row3_col1" autoRun="True">
+
+    <param name="savedSearch">puppet_disabled_hosts_table</param>
     <module name="Paginator">
         <param name="count">30</param>
         <param name="entityName">results</param>
-      <module name="ViewRedirectorLink" layoutPanel="panel_row2_col2_grp1">
+      <module name="ViewRedirectorLink" layoutPanel="panel_row3_col1_grp1">
         <param name="viewTarget">flashtimeline</param>
         <param name="label">View full results</param>
       </module>
       <module name="SimpleResultsTable">
           <param name="drilldown">row</param>
-          <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
-              <param name="search">sourcetype=puppet_syslog|table host</param>
+          <module name="HiddenSavedSearch" layoutPanel="panel_row3_col1" autoRun="True">
+              <param name="savedSearch">puppet_disabled_hosts_table</param>
             <module name="ConvertToDrilldownSearch">
                 <module name="ViewRedirector">
                     <param name="viewTarget">flashtimeline</param>
@@ -72,7 +114,6 @@
           </module>
         </module>
     </module>
-
 
 </module>
 </view>
