@@ -8,18 +8,15 @@
     <param name="clearOnJobDispatch">False</param>
     <param name="maxSize">1</param>
   </module>
-  <module name="TitleBar" layoutPanel="viewHeader">
+  <module name="TitleBar" layoutPanel="navigationHeader">
     <param name="actionsMenuFilter">dashboard</param>
   </module>
 
-<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
-    <param name="src">puppet_withoutpuppetrun.html</param>
-</module>
-
-  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" autoRun="True">
-      <param name="savedSearch">hosts_without_successful_run</param>
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1"
+        group="Hosts Without Successful Puppet Run" autoRun="True">
+    <param name="savedSearch">hosts_without_successful_run</param>
     <module name="Paginator">
-      <param name="count">30</param>
+      <param name="count">15</param>
       <param name="entityName">results</param>
       <module name="ViewRedirectorLink" layoutPanel="panel_row2_col1_grp1">
         <param name="viewTarget">flashtimeline</param>
@@ -39,33 +36,12 @@
     </module>
   </module>
 
-<module name="GenericHeader" layoutPanel="panel_row2_col2">
-    <param name="label">Agent Run Times</param>
-
-    <module name="GenericHeader">
-        <param name="label">Average &amp; Standard Deviation</param>
-    </module>
-
-    <module name="StaticContentSample">
-        <param name="text">Average and standard deviation of Puppet agent
-            run-times, in seconds.</param>
-    </module>
-        <module name="HiddenSearch" autoRun="True">
-            <param name="search">|savedsearch puppet_agent_run_time_avg_30m|eval query=round(query,2) |rename query AS Average|appendcols [|savedsearch puppet_agent_run_time_stdev_30m|eval query=round(query,2)|rename query AS "Standard Deviation"]</param>
-            <module name="SimpleResultsTable">
-                <param name="displayRowNumbers">false</param>
-            </module>
-        </module>
-
-    <module name="GenericHeader">
-        <param name="label">Long Agent Runs</param>
-    </module>
-
-        <module name="HiddenSavedSearch" autoRun="True">
+    <module name="HiddenSavedSearch" autoRun="True"
+                group="Long Agent Run Times" layoutPanel="panel_row2_col2">
             <param name="savedSearch">puppet_run_times_greater_than_1_stdev</param>
 
             <module name="Paginator">
-                <param name="count">30</param>
+                <param name="count">10</param>
                 <param name="entityName">results</param>
                 <module name="SimpleResultsTable">
                     <param name="entityName">results</param>
@@ -82,17 +58,32 @@
                 </module>
             </module>
         </module>
-</module>
+
+    <module name="StaticContentSample" layoutPanel="panel_row2_col2">
+        <param name="text"><![CDATA[<hr/>]]>Average and standard deviation of Puppet agent
+            run-times, in seconds.</param>
+
+
+            <module name="HiddenSearch" autoRun="True" group="Long Agent Run Times">
+                <param name="search">|inputlookup puppet_run_stats.csv
+                    | eval run_time_limit = run_time_avg + run_time_stdev
+                    | table run_time_avg, run_time_stdev, run_time_limit
+                    | rename run_time_limit AS "Average + Std Dev"
+                    | rename run_time_avg AS Average
+                    | rename run_time_stdev AS "Standard Deviation"</param>
+                <module name="SimpleResultsTable">
+                    <param name="displayRowNumbers">false</param>
+                </module>
+            </module>
+
+    </module>
 
 <module name="GenericHeader" layoutPanel="panel_row2_col3">
     <param name="label">Something Else Here</param>
 </module>
 
-<module name="GenericHeader" layoutPanel="panel_row3_col1">
-    <param name="label">Hosts where Puppet agent is disabled</param>
-</module>
-
-<module name="HiddenSavedSearch" layoutPanel="panel_row3_col1" autoRun="True">
+<module name="HiddenSavedSearch" layoutPanel="panel_row3_col1" autoRun="True"
+        group="Hosts where Puppet agent is disabled">
 
     <param name="savedSearch">puppet_disabled_hosts_table</param>
     <module name="Paginator">
