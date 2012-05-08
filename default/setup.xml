@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<setup>
+    <block title="Puppet Host List Search" endpoint="saved/searches" entity="Puppet Host List">
+        <title>Search generating list of all hosts which should be running Puppet.</title>
+        <input field="search">
+            <label>Puppet Host List Search</label>
+            <type>text</type>
+        </input>
+    </block>
+
+    <block title="Puppet Logs Search" endpoint="saved/searches" entity="Puppet Logs Search">
+        <title>Search for Puppet Logs</title>
+        <input field="search">
+            <label>Puppet Logs Search</label>
+            <type>text</type>
+        </input>
+    </block>
+</setup>
