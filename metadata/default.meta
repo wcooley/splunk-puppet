@@ -1,30 +1,22 @@
+### DEFAULT
+
 []
 access = read : [ * ], write : [ admin ]
 
-[views/Puppet_Consistency]
-access = read : [ * ], write : [ admin ]
+### VIEWS
 
-[views/Puppet_Information]
-access = read : [ * ], write : [ admin ]
-
-[views/Puppet_Modulchanges]
-access = read : [ * ], write : [ admin ]
-
-[views/Puppet_Modulestatistics]
-access = read : [ * ], write : [ admin ]
-
-[views/Puppet_Readme]
-access = read : [ * ], write : [ admin ]
-
-[views/Puppet_Updates]
-access = read : [ * ], write : [ admin ]
-
-[views/Puppet_Withoutpuppetrun]
-access = read : [ * ], write : [ admin ]
+[views]
+export = none
 
 ### SAVED SEARCHES
-[savedsearches/update_puppet_run_time_stats]
-access = read : [ admin ], write : [ admin ]
+
+[savedsearches]
+export = system
+
+### MACROS
+
+[macros]
+export = system
 
 ### VIEWSTATES: even normal users should be able to create shared viewstates
 
@@ -60,11 +52,13 @@ export = system
 ### LOOKUP TABLES
 
 [lookups]
-access = read : [ * ], write : [ admin ]
 export = system
+
+[lookups/.gitignore]
+access = read : [], write : []
+export = none
 
 ### SEARCH SCRIPTS
 
 [searchscripts]
-access = read : [ * ], write : [ admin ]
 export = system
