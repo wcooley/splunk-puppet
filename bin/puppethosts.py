@@ -1,40 +1,58 @@
 #!/usr/bin/env python26
 #
 # Name: puppethosts.py
-# Desc: Splunk search command for parameterizing searches based on Puppet inventory
+# Desc: Splunk search command for generating lookup table of puppet hosts
 #
+# This command could also be used to search the Puppet inventory
 
 import csv
 import httplib
+import json
+import socket
+import subprocess
 import sys
-import yaml
 
 from pprint import pprint as pp
+from subprocess import PIPE, STDOUT
 
-OUTPUT = '/opt/splunk/etc/apps/Puppet/lookups/puppet_hosts.csv'
+from splunk import Intersplunk as si
+
+def puppet_config(key):
+    return exec_read_line(['puppet', 'agent', '--configprint', key])
+
+def exec_read_line(args):
+    return subprocess.Popen(args,
+                            stdin=PIPE,
+                            stdout=PIPE,
+                            stderr=STDOUT,
+                            close_fds=True).communicate()[0].rstrip()
+
 
 if __name__ == '__main__':
 
-    conn = httplib.HTTPSConnection('puppet.cic.pdx.edu', port='8140',
-            key_file='/tmp/puppet-client.key',
-            cert_file='/tmp/puppet-client.crt')
+    puppet_private_key  = puppet_config('hostprivkey')
+    puppet_client_cert  = puppet_config('hostcert')
+    puppet_master       = puppet_config('inventory_server')
+    puppet_master_port  = puppet_config('inventory_port')
+
+    conn = httplib.HTTPSConnection(puppet_master,
+                            puppet_master_port,
+                            key_file=puppet_private_key,
+                            cert_file=puppet_client_cert)
 
 
-    conn.request('GET', '/production/facts_search/search', None, {'Accept': 'yaml'})
+    conn.request('GET', '/production/facts_search/search', None, {'Accept': 'pson'})
 
     resp = conn.getresponse()
 
     if resp.status == 200:
-        puppetyaml = resp.read()
-        puppet_hosts = yaml.load(puppetyaml)
+        puppet_hosts = json.loads(resp.read())
         puppet_hosts.sort()
 
-        puppet_host_tab = [ (fqdn, fqdn.split('.')[0]) for fqdn in puppet_hosts ]
+        puppet_host_tab = [ dict((('fqdn',fqdn), ('host',fqdn.split('.')[0]))) \
+                            for fqdn in puppet_hosts ]
 
-        csvout = csv.writer(open(OUTPUT, 'w'))
-
-        csvout.writerow(['fqdn', 'host'])
-        csvout.writerows(puppet_host_tab)
+        si.outputResults(puppet_host_tab)
 
     else:
-        print >>sys.stderr, "Error: Status '%d', Reason '%s'" % ( resp.status, resp.reason)
+        si.generateErrorResults("Error: Status '%d', Reason '%s'" % (resp.status, resp.reason))
