@@ -49,7 +49,7 @@
       <module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
         <param name="searchWhenChanged">True</param>
         <param name="selected">Last 24 Hours</param>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">Kernel Patch State</param>
           </module>
@@ -66,7 +66,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">Syslog Configuration</param>
           </module>
@@ -83,7 +83,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">Fair Share Scheduler</param>
           </module>
@@ -100,7 +100,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">Network Mode (Speed und Duplex)</param>
           </module>
@@ -146,7 +146,7 @@
       <module name="TimeRangePicker" layoutPanel="panel_row3_col2_grp2">
         <param name="searchWhenChanged">True</param>
         <param name="selected">Last 24 Hours</param>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
           <module name="GenericHeader">
             <param name="label">Kernel Patch State</param>
           </module>
@@ -163,7 +163,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
           <module name="GenericHeader">
             <param name="label">Syslog Configuration</param>
           </module>
@@ -180,7 +180,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
           <module name="GenericHeader">
             <param name="label">Fair Share Scheduler</param>
           </module>
@@ -197,7 +197,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
           <module name="GenericHeader">
             <param name="label">Network Mode (Speed und Duplex)</param>
           </module>

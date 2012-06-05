@@ -49,7 +49,7 @@
       <module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
         <param name="searchWhenChanged">True</param>
         <param name="selected">Last 24 Hours</param>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">Sudo</param>
           </module>
@@ -66,7 +66,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">SSL</param>
           </module>
@@ -83,7 +83,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">Splunk</param>
           </module>
@@ -100,7 +100,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">SSH</param>
           </module>
@@ -117,7 +117,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">Puppet</param>
           </module>
@@ -134,7 +134,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">Midnight Commander</param>
           </module>
@@ -180,7 +180,7 @@
       <module name="TimeRangePicker" layoutPanel="panel_row3_col2_grp2">
         <param name="searchWhenChanged">True</param>
         <param name="selected">Last 24 Hours</param>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
           <module name="GenericHeader">
             <param name="label">Sudo</param>
           </module>
@@ -197,7 +197,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
           <module name="GenericHeader">
             <param name="label">SSL</param>
           </module>
@@ -214,7 +214,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
           <module name="GenericHeader">
             <param name="label">Splunk</param>
           </module>
@@ -231,7 +231,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
           <module name="GenericHeader">
             <param name="label">SSH</param>
           </module>
@@ -248,7 +248,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
           <module name="GenericHeader">
             <param name="label">Puppet</param>
           </module>
@@ -265,7 +265,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
           <module name="GenericHeader">
             <param name="label">Midnight Commander</param>
           </module>
