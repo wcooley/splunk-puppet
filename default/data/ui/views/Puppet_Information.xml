@@ -48,7 +48,7 @@
       <module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
         <param name="searchWhenChanged">True</param>
         <param name="selected">Last 24 Hours</param>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">Last Run</param>
           </module>
@@ -67,7 +67,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
             <param name="label">Puppet Error</param>
           </module>
@@ -84,7 +84,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">Duration of Puppetrun</param>
           </module>
@@ -100,7 +100,7 @@
             <param name="label">View full results</param>
           </module>
         </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <module name="GenericHeader">
             <param name="label">Puppet Version</param>
           </module>
