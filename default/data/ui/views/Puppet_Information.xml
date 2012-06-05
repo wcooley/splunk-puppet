@@ -1,141 +1,126 @@
+<?xml version="1.0"?>
 <view template="dashboard.html">
   <label>Information</label>
-
   <module name="AccountBar" layoutPanel="appHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
-
   <module name="Message" layoutPanel="messaging">
     <param name="filter">*</param>
     <param name="clearOnJobDispatch">False</param>
     <param name="maxSize">1</param>
   </module>
-
   <module name="TitleBar" layoutPanel="viewHeader">
     <param name="actionsMenuFilter">dashboard</param>
   </module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
+  <module name="ServerSideInclude" layoutPanel="panel_row2_col1">
     <param name="src">puppet_hosts.html</param>
-</module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row2_col2">
+  </module>
+  <module name="ServerSideInclude" layoutPanel="panel_row2_col2">
     <param name="src">puppet_environment.html</param>
-</module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row3_col1">
+  </module>
+  <module name="ServerSideInclude" layoutPanel="panel_row3_col1">
     <param name="src">puppet_information.html</param>
-</module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row3_col2">
+  </module>
+  <module name="ServerSideInclude" layoutPanel="panel_row3_col2">
     <param name="src">puppet_information.html</param>
-</module>
-
-
-<module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
+  </module>
+  <module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
     <param name="label">Hosts</param>
-         <param name="settingToCreate">host_setting</param>
-         <param name="search">| `puppet_hosts`</param>
-         <param name="searchWhenChanged">True</param>
-         <param name="searchFieldsToDisplay">
-	<list>
-	      <param name="label">host</param>
-	      <param name="value">host</param>
-	</list>
-        </param>
+    <param name="settingToCreate">host_setting</param>
+    <param name="search">| `puppet_hosts`</param>
+    <param name="searchWhenChanged">True</param>
+    <param name="searchFieldsToDisplay">
+      <list>
+        <param name="label">host</param>
+        <param name="value">host</param>
+      </list>
+    </param>
     <module name="ConvertToIntention">
-           <param name="settingToConvert">host_setting</param>
-           <param name="intention">
-           <param name="name">stringreplace</param>
-           <param name="arg">
-           <param name="host">
-           <param name="fillOnEmpty">True</param>
-           <param name="value">$target$</param>
+      <param name="settingToConvert">host_setting</param>
+      <param name="intention">
+        <param name="name">stringreplace</param>
+        <param name="arg">
+          <param name="host">
+            <param name="fillOnEmpty">True</param>
+            <param name="value">$target$</param>
+          </param>
         </param>
       </param>
-    </param>
-
-<module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
-   <param name="searchWhenChanged">True</param>
-   <param name="selected">Last 24 Hours</param>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
-    <module name="GenericHeader">
-        <param name="label">Last Run</param>
-    </module>
-    <param name="search">
-<!--      `puppet_agent_run_time($host$)` -->
+      <module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
+        <param name="searchWhenChanged">True</param>
+        <param name="selected">Last 24 Hours</param>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Last Run</param>
+          </module>
+          <param name="search"><!--      `puppet_agent_run_time($host$)` -->
        host=$host$ eventtype=puppet_agent "Finished catalog run in"
       | dedup host| eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S")| table mytime
     </param>
-    <module name="SingleValue">
-                  <param name="format">none</param>
-    </module>
-</module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search">`puppet_agent_run_time($host$)`</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-      <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
-        <module name="GenericHeader">
-          <param name="label">Puppet Error</param>
+          <module name="SingleValue">
+            <param name="format">none</param>
+          </module>
         </module>
-        <param name="search">host=$host$ eventtype=puppet_error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
-        <module name="SingleValue">
-          <param name="field">count</param>
-          <param name="classField">range</param>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+          <param name="search">`puppet_agent_run_time($host$)`</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
         </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Puppet Error</param>
+          </module>
+          <param name="search">host=$host$ eventtype=puppet_error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
+          <module name="SingleValue">
+            <param name="field">count</param>
+            <param name="classField">range</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+          <param name="search">host=$host$ eventtype=puppet_error</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Duration of Puppetrun</param>
+          </module>
+          <param name="search">`puppet_agent_run_time($host$)`| rename puppet_catalog_run_time AS seconds| table seconds</param>
+          <module name="SingleValue">
+            <param name="afterLabel">seconds</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+          <param name="search">`puppet_agent_run_time($host$)`</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Puppet Version</param>
+          </module>
+          <param name="search">node=$host$  `puppet_version`| table version</param>
+          <module name="SingleValue">
+            <param name="field">version</param>
+            <param name="format">none</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+          <param name="search">node=$host$ `puppet_version`</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+      </module>
     </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search">host=$host$ eventtype=puppet_error</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-<module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
-    <module name="GenericHeader">
-        <param name="label">Duration of Puppetrun</param>
-    </module>
-                  <param name="search">`puppet_agent_run_time($host$)`| rename puppet_catalog_run_time AS seconds| table seconds</param>
-    <module name="SingleValue">
-                  <param name="afterLabel">seconds</param>
-    </module>
-</module>
-<module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search">`puppet_agent_run_time($host$)`</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-</module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
-    <module name="GenericHeader">
-        <param name="label">Puppet Version</param>
-    </module>
-                  <param name="search">node=$host$  `puppet_version`| table version</param>
-    <module name="SingleValue">
-                  <param name="field">version</param>
-                  <param name="format">none</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search">node=$host$ `puppet_version`</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-    </module>
-    </module>
-    </module>
-
- <module name="HiddenSavedSearch" layoutPanel="panel_row3_col2" group="Puppet Errors By Host" autoRun="True">
+  </module>
+  <module name="HiddenSavedSearch" layoutPanel="panel_row3_col2" group="Puppet Errors By Host" autoRun="True">
     <param name="savedSearch">Puppet Errors By Host</param>
     <param name="groupLabel">Puppet Errors By Host</param>
     <module name="ViewstateAdapter">
