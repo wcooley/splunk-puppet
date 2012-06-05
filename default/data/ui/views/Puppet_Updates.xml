@@ -1,6 +1,6 @@
+<?xml version="1.0"?>
 <view template="dashboard.html">
   <label>Updates</label>
-
   <module name="AccountBar" layoutPanel="appHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
   <module name="Message" layoutPanel="messaging">
@@ -11,270 +11,278 @@
   <module name="TitleBar" layoutPanel="viewHeader">
     <param name="actionsMenuFilter">dashboard</param>
   </module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
+  <module name="ServerSideInclude" layoutPanel="panel_row2_col1">
     <param name="src">puppet_hosts.html</param>
-</module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row2_col2">
+  </module>
+  <module name="ServerSideInclude" layoutPanel="panel_row2_col2">
     <param name="src">puppet_environment.html</param>
-</module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row3_col1">
+  </module>
+  <module name="ServerSideInclude" layoutPanel="panel_row3_col1">
     <param name="src">puppet_updates.html</param>
-</module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row3_col2">
+  </module>
+  <module name="ServerSideInclude" layoutPanel="panel_row3_col2">
     <param name="src">puppet_updates.html</param>
-</module>
-
-<module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
-         <param name="label">Hosts </param>
-         <param name="settingToCreate">host_setting</param>
-         <param name="search">|`puppet_hosts`</param>
-         <param name="searchWhenChanged">True</param>
-         <param name="searchFieldsToDisplay">
-	<list>
-	      <param name="label">host</param>
-	      <param name="value">host</param>
-	</list>
-</param>
+  </module>
+  <module name="SearchSelectLister" layoutPanel="panel_row3_col1_grp1">
+    <param name="label">Hosts </param>
+    <param name="settingToCreate">host_setting</param>
+    <param name="search">|`puppet_hosts`</param>
+    <param name="searchWhenChanged">True</param>
+    <param name="searchFieldsToDisplay">
+      <list>
+        <param name="label">host</param>
+        <param name="value">host</param>
+      </list>
+    </param>
     <module name="ConvertToIntention">
-           <param name="settingToConvert">host_setting</param>
-           <param name="intention">
-           <param name="name">stringreplace</param>
-           <param name="arg">
-           <param name="host">
-           <param name="fillOnEmpty">True</param>
-           <param name="prefix">host=</param>
-           <param name="value">$target$</param>
+      <param name="settingToConvert">host_setting</param>
+      <param name="intention">
+        <param name="name">stringreplace</param>
+        <param name="arg">
+          <param name="host">
+            <param name="fillOnEmpty">True</param>
+            <param name="prefix">host=</param>
+            <param name="value">$target$</param>
+          </param>
         </param>
       </param>
-    </param>
-<module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
-   <param name="searchWhenChanged">True</param>
-   <param name="selected">Last 24 Hours</param>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
-    <module name="GenericHeader"><param name="label">Sudo</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+      <module name="TimeRangePicker" layoutPanel="panel_row3_col1_grp2">
+        <param name="searchWhenChanged">True</param>
+        <param name="selected">Last 24 Hours</param>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Sudo</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
-    <module name="GenericHeader"><param name="label">SSL</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-         <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host </param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
-    <module name="GenericHeader"><param name="label">Splunk</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host | stats count(sourcetype) | rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-       <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host </param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
-    <module name="GenericHeader"><param name="label">SSH</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent *smcosh* ensure created | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">SSL</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+          <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host </param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Splunk</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host | stats count(sourcetype) | rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
+          <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host </param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">SSH</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent *smcosh* ensure created | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <param name="search"> $host$ eventtype=puppet_agent *smcosh* ensure created</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
-    <module name="GenericHeader"><param name="label">Puppet</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
-         <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
-    <module name="GenericHeader"><param name="label">Midnight Commander</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Puppet</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
+          <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Midnight Commander</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp2">
           <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+      </module>
     </module>
-    </module>
-    </module>
-    </module>
-    </module>
-
-<module name="SearchSelectLister" layoutPanel="panel_row3_col2_grp1">
-         <param name="label">Environment </param>
-         <param name="settingToCreate">host_setting</param>
-         <param name="search">|`puppet_hosts`</param>
-         <param name="searchWhenChanged">True</param>
-         <param name="searchFieldsToDisplay">
-	<list>
-	      <param name="label">host</param>
-	      <param name="value">host</param>
-	</list>
-</param>
+  </module>
+  <module name="SearchSelectLister" layoutPanel="panel_row3_col2_grp1">
+    <param name="label">Environment </param>
+    <param name="settingToCreate">host_setting</param>
+    <param name="search">|`puppet_hosts`</param>
+    <param name="searchWhenChanged">True</param>
+    <param name="searchFieldsToDisplay">
+      <list>
+        <param name="label">host</param>
+        <param name="value">host</param>
+      </list>
+    </param>
     <module name="ConvertToIntention">
-           <param name="settingToConvert">host_setting</param>
-           <param name="intention">
-           <param name="name">stringreplace</param>
-           <param name="arg">
-           <param name="host">
-           <param name="fillOnEmpty">True</param>
-           <param name="prefix">host=</param>
-           <param name="value">$target$</param>
+      <param name="settingToConvert">host_setting</param>
+      <param name="intention">
+        <param name="name">stringreplace</param>
+        <param name="arg">
+          <param name="host">
+            <param name="fillOnEmpty">True</param>
+            <param name="prefix">host=</param>
+            <param name="value">$target$</param>
+          </param>
         </param>
       </param>
-    </param>
-<module name="TimeRangePicker" layoutPanel="panel_row3_col2_grp2">
-   <param name="searchWhenChanged">True</param>
-   <param name="selected">Last 24 Hours</param>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
-    <module name="GenericHeader"><param name="label">Sudo</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
-           <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
-    <module name="GenericHeader"><param name="label">SSL</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host | stats count(sourcetype) | rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
-                  <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host </param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
-    <module name="GenericHeader"><param name="label">Splunk</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host | stats count(sourcetype) | rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
-           <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host </param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
-    <module name="GenericHeader"><param name="label">SSH</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent *smcosh* ensure created | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
+      <module name="TimeRangePicker" layoutPanel="panel_row3_col2_grp2">
+        <param name="searchWhenChanged">True</param>
+        <param name="selected">Last 24 Hours</param>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Sudo</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
+          <param name="search"> $host$ eventtype=puppet_agent sudopkg ensure changed | transaction host</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">SSL</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host | stats count(sourcetype) | rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
+          <param name="search"> $host$ eventtype=puppet_agent openssl ensure changed | transaction host </param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Splunk</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host | stats count(sourcetype) | rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp1">
+          <param name="search"> $host$ eventtype=puppet_agent splunk Package ensure changed | transaction host </param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">SSH</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent *smcosh* ensure created | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
           <param name="search"> $host$ eventtype=puppet_agent *smcosh* ensure created</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Puppet</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
+          <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
+          <module name="GenericHeader">
+            <param name="label">Midnight Commander</param>
+          </module>
+          <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
+          <module name="SingleValue">
+            <param name="classField">range</param>
+            <param name="afterLabel">Update</param>
+          </module>
+        </module>
+        <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
+          <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed</param>
+          <module name="ViewRedirectorLink">
+            <param name="viewTarget">flashtimeline</param>
+            <param name="label">View full results</param>
+          </module>
+        </module>
+      </module>
     </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
-    <module name="GenericHeader"><param name="label">Puppet</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
-         <param name="search"> $host$ eventtype=puppet_agent updatepuppet ensure changed</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2" autoRun="True">
-    <module name="GenericHeader"><param name="label">Midnight Commander</param></module>
-                  <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed | transaction host | stats count(sourcetype) |  rangemap field=count(sourcetype) default=guarded</param>
-    <module name="SingleValue">
-                  <param name="classField">range</param>
-                  <param name="afterLabel">Update</param>
-    </module>
-    </module>
-    <module name="HiddenSearch" layoutPanel="panel_row3_col2_grp2">
-        <param name="search"> $host$ eventtype=puppet_agent mc Package ensure changed</param>
-    <module name="ViewRedirectorLink">
-                                <param name="viewTarget">flashtimeline</param>
-                                <param name="label">View full results</param>
-    </module>
-    </module>
-    </module>
-    </module>
-    </module>
+  </module>
 </view>

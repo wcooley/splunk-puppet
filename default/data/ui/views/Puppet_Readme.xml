@@ -1,6 +1,6 @@
+<?xml version="1.0"?>
 <view template="dashboard.html">
   <label>Readme</label>
-
   <module name="AccountBar" layoutPanel="appHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
   <module name="Message" layoutPanel="messaging">
@@ -11,9 +11,7 @@
   <module name="TitleBar" layoutPanel="viewHeader">
     <param name="actionsMenuFilter">dashboard</param>
   </module>
-
-<module name="ServerSideInclude" layoutPanel="panel_row2_col1">
+  <module name="ServerSideInclude" layoutPanel="panel_row2_col1">
     <param name="src">puppet_readme.html</param>
-</module>
-
+  </module>
 </view>
