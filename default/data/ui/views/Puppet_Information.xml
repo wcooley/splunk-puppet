@@ -53,14 +53,14 @@
             <param name="label">Last Run</param>
           </module>
           <param name="search">
-              `puppet_agent_run_time($host$)` | dedup host| eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S")| table mytime
+              `puppet_agent_run_time($host$)`
           </param>
-          <module name="SingleValue">
-            <param name="format">none</param>
+          <module name="HiddenPostProcess">
+            <param name="search">dedup host| eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S")|table mytime</param>
+            <module name="SingleValue">
+              <param name="format">none</param>
+            </module>
           </module>
-        </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
-          <param name="search">`puppet_agent_run_time($host$)`</param>
           <module name="ViewRedirectorLink">
             <param name="viewTarget">flashtimeline</param>
             <param name="label">View full results</param>
@@ -70,14 +70,14 @@
           <module name="GenericHeader">
             <param name="label">Puppet Error</param>
           </module>
-          <param name="search">host=$host$ eventtype=puppet_error | stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
-          <module name="SingleValue">
-            <param name="field">count</param>
-            <param name="classField">range</param>
-          </module>
-        </module>
-        <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <param name="search">host=$host$ eventtype=puppet_error</param>
+          <module name="HiddenPostProcess">
+              <param name="search">stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
+            <module name="SingleValue">
+                <param name="field">count</param>
+                <param name="classField">range</param>
+            </module>
+          </module>
           <module name="ViewRedirectorLink">
             <param name="viewTarget">flashtimeline</param>
             <param name="label">View full results</param>
