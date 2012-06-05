@@ -10,6 +10,7 @@
     <param name="maxSize">1</param>
   </module>
   <module name="SearchBar" layoutPanel="splSearchControls-inline">
+    <param name="default">eventtype=puppet</param>
     <param name="useAssistant">true</param>
     <param name="useTypeahead">true</param>
     <param name="useOwnSubmitButton">False</param>
