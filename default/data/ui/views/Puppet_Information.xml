@@ -52,10 +52,9 @@
           <module name="GenericHeader">
             <param name="label">Last Run</param>
           </module>
-          <param name="search"><!--      `puppet_agent_run_time($host$)` -->
-       host=$host$ eventtype=puppet_agent "Finished catalog run in"
-      | dedup host| eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S")| table mytime
-    </param>
+          <param name="search">
+              `puppet_agent_run_time($host$)` | dedup host| eval mytime=strftime(_time,"%Y-%m-%d %H:%M:%S")| table mytime
+          </param>
           <module name="SingleValue">
             <param name="format">none</param>
           </module>
