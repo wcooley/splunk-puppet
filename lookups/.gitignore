@@ -1,1 +1,2 @@
-puppet_run_stats.csv
+*
+!.gitignore
