@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <view template="dashboard.html">
-  <label>Agent Run Anomalies</label>
+  <label>Agent Anomalies</label>
   <module name="AccountBar" layoutPanel="appHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
   <module name="Message" layoutPanel="messaging">

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <view template="dashboard.html">
-  <label>Module Statistics</label>
+  <label>Statistics</label>
   <module name="AccountBar" layoutPanel="navigationHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
   <module name="Message" layoutPanel="messaging">
