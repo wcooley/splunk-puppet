@@ -1,51 +1,47 @@
 
 **************************************
 
-This is a copy of the Puppet app that is available from Splunkbase:
-
-http://splunk-base.splunk.com/apps/Splunk+for+Puppet+Configuration+Management
+This is a copy of the Puppet app that is available from
+[Splunkbase](http://splunk-base.splunk.com/apps/Splunk+for+Puppet+Configuration+Management)
 
 This is not the original source!
 
 Wil Cooley <wcooley@pdx.edu>
 **************************************
 
-#####Welcome to the Puppet Dashboard#####
+Welcome to the Splunk for Puppet App
+====================================
 
-#The meaning and purpose of this app is to give you a glimpse on some of the enhanced features in 
-#puppet for creating a really nice dashboard.
-#Everything was created by myself only the pictures are taken from Iconspedia.com. Please refere to 
-#the manual on how to use the features. I hope you find this app usefull, any feedback is welcomed.
+This app should give insight into the health and functioning of your Puppet
+installation.
 
-#Puppet is an open source data center automation and configuration management framework. Puppet 
-#provides system administrators with a simplified platform that allows for consistent, transparent, 
-#and flexible systems management.
+The Views
+---------
 
+The views are the following:
 
-######What is Puppet#####
+ * Overview
+ * Changes
+ * Statistics
+ * Agent Anomalies
 
-#Puppet.s declarative language describes your system configuration, allowing you to easily reproduce 
-#any configuration on any number of additional systems. Additionally, Puppet can help establish and 
-#enforce approved system configurations automatically correcting systems that drift from their 
-#baseline. Puppet provides an audit trail of all your systems, which can easily be kept in version 
-#control for compliance purposes.
+The different views should be self-explanatory.
 
-#####The Views#####
+Installation & Setup
+--------------------
 
-#In total there are six different views, which all show an other data ouput from puppet on the 
-#systems.
+### Version Monitoring ###
 
-#The views are the following six:
+To gather version information, add the following to your manifests (I have it
+towards the top of my site.pp, outside of any node definitions):
 
-#    * Information
-#    * Consistency
-#    * Module Changes
-#    * Module Statistics
-#    * Updates
-#    * Without Puppetrun
+ `info("node=${hostname} puppetversion=${puppetversion}")`
 
+### CIM Log Reporting ###
 
-#The different views are self explanatory. The necessary information to understand the views is 
-#directly on each view. Check them out and you will see what they do.
+Some functionality requires report data from the puppet-cimlog report
+processor, written to format and log data for ease of consumption by Splunk.
 
+ https://github.com/wcooley/puppet-cimlog
 
+FIXME Need a lot more here.
