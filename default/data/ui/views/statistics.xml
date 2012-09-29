@@ -21,7 +21,7 @@
     <param name="src">puppet_statistics.html</param>
   </module>
   <module name="TimeRangePicker" layoutPanel="panel_row2_col1">
-    <param name="selected">Last 24 Hours</param>
+    <param name="selected">Last 15 Minutes</param>
     <param name="searchWhenChanged">True</param>
 <!-- Top Resources -->
     <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1">
@@ -48,7 +48,7 @@
     </module>
   </module>
   <module name="TimeRangePicker" layoutPanel="panel_row3_col1">
-    <param name="selected">Last 24 Hours</param>
+    <param name="selected">Last 15 Minutes</param>
     <param name="searchWhenChanged">True</param>
 <!-- What changed -->
     <module name="HiddenSavedSearch" layoutPanel="panel_row3_col1">
@@ -75,7 +75,7 @@
     </module>
   </module>
   <module name="TimeRangePicker" layoutPanel="panel_row4_col1">
-    <param name="selected">Last 24 Hours</param>
+    <param name="selected">Last 15 Minutes</param>
     <param name="searchWhenChanged">True</param>
 <!-- Top hosts -->
     <module name="HiddenSavedSearch" layoutPanel="panel_row4_col1">

@@ -48,7 +48,7 @@
       </param>
       <module name="TimeRangePicker">
         <param name="searchWhenChanged">True</param>
-        <param name="selected">Last 24 Hours</param>
+        <param name="selected">Last 15 Minutes</param>
         <module name="HiddenSearch">
           <param name="search"> $host$ eventtype=puppet_agent changed NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
           <module name="Paginator">
@@ -96,7 +96,7 @@
       </param>
       <module name="TimeRangePicker">
         <param name="searchWhenChanged">True</param>
-        <param name="selected">Last 24 Hours</param>
+        <param name="selected">Last 15 Minutes</param>
         <module name="HiddenSearch">
           <param name="search"> $host$ eventtype=puppet_agent changed  NOT "*.rb" |rex field=_raw "\/\w+\[(?&lt;puressource&gt;\S+)\].*\).(?&lt;puchange&gt;\w+.\w+)" | head 200 | fields host puressource puchange</param>
           <module name="Paginator">
