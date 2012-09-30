@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <view template="dashboard.html">
-  <label>Agent Run Anomalies</label>
+  <label>Agent Anomalies</label>
   <module name="AccountBar" layoutPanel="appHeader"/>
   <module name="AppBar" layoutPanel="navigationHeader"/>
   <module name="Message" layoutPanel="messaging">
@@ -11,7 +11,7 @@
   <module name="TitleBar" layoutPanel="navigationHeader">
     <param name="actionsMenuFilter">dashboard</param>
   </module>
-  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" group="Hosts Without Successful Puppet Run" autoRun="True">
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" group="Hosts Without Successful Agent Run" autoRun="True">
     <param name="savedSearch">hosts_without_successful_run</param>
     <module name="Paginator">
       <param name="count">15</param>

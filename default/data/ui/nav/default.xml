@@ -1,11 +1,9 @@
 <nav>
-    <view name="Puppet_Information" default='true'/>
+    <view name="overview" default='true'/>
     <view name="flashtimeline"/>
-    <view name="Puppet_Consistency"/>
-    <view name="Puppet_Modulchanges"/>
-    <view name="Puppet_Modulestatistics"/>
-    <view name="Puppet_Updates"/>
-    <view name="Puppet_Withoutpuppetrun"/>
+    <view name="changes"/>
+    <view name="statistics"/>
+    <view name="agent_anamolies"/>
   <collection label="Views">
     <view name="charting" />
     <divider />
