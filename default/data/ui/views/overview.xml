@@ -68,9 +68,9 @@
         </module>
         <module name="HiddenSearch" layoutPanel="panel_row3_col1_grp1">
           <module name="GenericHeader">
-            <param name="label">Puppet Error</param>
+            <param name="label">Puppet Agent Error</param>
           </module>
-          <param name="search">host=$host$ eventtype=puppet_error</param>
+          <param name="search">host=$host$ eventtype=puppet_agent_error</param>
           <module name="HiddenPostProcess">
               <param name="search">stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
             <module name="SingleValue">
@@ -121,7 +121,7 @@
   </module>
   <module name="HiddenSavedSearch" layoutPanel="panel_row3_col2" group="Puppet Errors By Host" autoRun="True">
     <param name="savedSearch">Puppet Errors By Host</param>
-    <param name="groupLabel">Puppet Errors By Host</param>
+    <param name="groupLabel">Puppet Agent Errors By Host</param>
     <module name="ViewstateAdapter">
       <param name="savedSearch">Puppet Errors By Host</param>
       <module name="HiddenFieldPicker">
