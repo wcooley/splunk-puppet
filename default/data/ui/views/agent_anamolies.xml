@@ -22,14 +22,16 @@
       </module>
       <module name="SimpleResultsTable">
         <param name="drilldown">row</param>
+        <!--
         <module name="HiddenSearch" layoutPanel="panel_row2_col1" autoRun="True">
-          <param name="search">eventtype=puppet|table host</param>
+            <param name="search">eventtype=puppet|table host</param> -->
           <module name="ConvertToDrilldownSearch">
             <module name="ViewRedirector">
               <param name="viewTarget">flashtimeline</param>
             </module>
           </module>
-        </module>
+        <!--
+    </module> -->
       </module>
     </module>
   </module>
@@ -68,8 +70,25 @@
       </module>
     </module>
   </module>
-  <module name="GenericHeader" layoutPanel="panel_row2_col3">
-    <param name="label">Something Else Here</param>
+  <module name="HiddenSavedSearch" autoRun="True" layoutPanel="panel_row2_col3" group="Hosts From Inventory Unseen">
+      <param name="savedSearch">Unseen Puppet inventory</param>
+      <module name="Paginator">
+            <param name="count">15</param>
+            <param name="entityName">results</param>
+            <module name="SimpleResultsTable">
+                <param name="entityName">results</param>
+                <param name="drilldown">row</param>
+                <module name="ConvertToDrilldownSearch">
+                    <module name="ViewRedirector">
+                        <param name="viewTarget">flashtimeline</param>
+                    </module>
+                </module>
+            </module>
+            <module name="ViewRedirectorLink">
+                <param name="viewTarget">flashtimeline</param>
+                <param name="label">View full results</param>
+            </module>
+      </module>
   </module>
   <module name="HiddenSavedSearch" layoutPanel="panel_row3_col1" autoRun="True" group="Hosts where Puppet agent is disabled">
     <param name="savedSearch">puppet_disabled_hosts_table</param>
