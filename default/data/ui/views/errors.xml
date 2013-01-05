@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<view template="dashboard.html">
+  <label>Error Statistics</label>
+  <module name="AccountBar" layoutPanel="navigationHeader"></module>
+  <module name="AppBar" layoutPanel="navigationHeader"></module>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+  <module name="TitleBar" layoutPanel="viewHeader">
+    <param name="actionsMenuFilter">dashboard</param>
+  </module>
+
+<!-- Errors by Host -->
+  <module name="TimeRangePicker" layoutPanel="panel_row4_col1" group="Errors by Host">
+    <param name="selected">Last 15 Minutes</param>
+    <param name="searchWhenChanged">True</param>
+    <module name="HiddenSavedSearch">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_errors_by_host</param>
+      <!-- Chart -->
+      <module name="NullModule" layoutPanel="panel_row4_col1_grp1">
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <param name="height">100%</param>
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
+            </module>
+          </module>
+        </module>
+      </module>
+      <!-- Table -->
+      <module name="NullModule" layoutPanel="panel_row4_col1_grp2">
+        <module name="JobProgressIndicator"></module>
+        <module name="SimpleResultsTable">
+          <param name="drilldown">row</param>
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+        <module name="ViewRedirectorLink">
+          <param name="viewTarget">flashtimeline</param>
+        </module>
+      </module>
+    </module>
+  </module>
+
+<!-- Errors by Class -->
+  <module name="TimeRangePicker" layoutPanel="panel_row3_col1" group="Errors by Class">
+    <param name="selected">Last 15 Minutes</param>
+    <param name="searchWhenChanged">True</param>
+    <module name="HiddenSavedSearch">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_errors_by_class</param>
+      <!-- Chart -->
+      <module name="NullModule" layoutPanel="panel_row3_col1_grp1">
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <param name="height">100%</param>
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
+            </module>
+          </module>
+        </module>
+      </module>
+      <!-- Table -->
+      <module name="NullModule" layoutPanel="panel_row3_col1_grp2">
+        <module name="JobProgressIndicator"></module>
+        <module name="SimpleResultsTable">
+          <param name="drilldown">row</param>
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+        <module name="ViewRedirectorLink">
+          <param name="viewTarget">flashtimeline</param>
+        </module>
+      </module>
+    </module>
+  </module>
+
+  <!-- Errors by Resource Type -->
+  <module name="TimeRangePicker" layoutPanel="panel_row2_col1" group="Errors by Resource Type">
+    <param name="selected">Last 15 Minutes</param>
+    <param name="searchWhenChanged">True</param>
+    <module name="HiddenSavedSearch">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_errors_by_resource_type</param>
+      <!-- Chart -->
+      <module name="NullModule" layoutPanel="panel_row2_col1_grp1">
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <param name="height">100%</param>
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
+            </module>
+          </module>
+        </module>
+      </module>
+      <!-- Table -->
+      <module name="NullModule" layoutPanel="panel_row2_col1_grp2">
+        <module name="JobProgressIndicator"></module>
+        <module name="SimpleResultsTable">
+          <param name="drilldown">row</param>
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+        <module name="ViewRedirectorLink">
+          <param name="viewTarget">flashtimeline</param>
+        </module>
+      </module>
+    </module>
+  </module>
+
+</view>
