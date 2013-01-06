@@ -13,120 +13,140 @@
   </module>
 
   <!-- Changes by Resource Type -->
-  <module name="TimeRangePicker" layoutPanel="panel_row2_col1" group="Changes by Resource Type">
+  <module name="TimeRangePicker" layoutPanel="viewHeader">
     <param name="selected">Last 15 Minutes</param>
     <param name="searchWhenChanged">True</param>
-    <module name="HiddenSavedSearch">
+
+    <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1">
       <param name="autoRun">true</param>
-      <param name="savedSearch">puppet_changes_by_resource_type</param>
-      <!-- Chart -->
-      <module name="NullModule" layoutPanel="panel_row2_col1_grp1">
-        <module name="HiddenChartFormatter">
-          <param name="chart">pie</param>
-          <module name="JSChart">
-            <param name="height">100%</param>
-            <module name="ConvertToDrilldownSearch">
-              <module name="ViewRedirector">
-                <param name="viewTarget">flashtimeline</param>
-              </module>
-            </module>
-          </module>
-        </module>
-      </module>
-      <!-- Table -->
-      <module name="NullModule" layoutPanel="panel_row2_col1_grp2">
-        <module name="JobProgressIndicator"></module>
+      <param name="savedSearch">puppet_general_stats_table</param>
+      <module name="JobProgressIndicator">
         <module name="SimpleResultsTable">
-          <param name="drilldown">row</param>
-          <module name="ConvertToDrilldownSearch">
-            <module name="ViewRedirector">
-              <param name="viewTarget">flashtimeline</param>
-            </module>
-          </module>
-        </module>
-        <module name="ViewRedirectorLink">
-          <param name="viewTarget">flashtimeline</param>
+          <param name="displayRowNumbers">off</param>
         </module>
       </module>
     </module>
-  </module>
 
-<!-- Changes by Class -->
-  <module name="TimeRangePicker" layoutPanel="panel_row3_col1" group="Changes by Class">
-    <param name="selected">Last 15 Minutes</param>
-    <param name="searchWhenChanged">True</param>
-    <module name="HiddenSavedSearch">
-      <param name="autoRun">true</param>
-      <param name="savedSearch">puppet_changes_by_class</param>
-      <!-- Chart -->
-      <module name="NullModule" layoutPanel="panel_row3_col1_grp1">
-        <module name="HiddenChartFormatter">
-          <param name="chart">pie</param>
-          <module name="JSChart">
-            <param name="height">100%</param>
-            <module name="ConvertToDrilldownSearch">
-              <module name="ViewRedirector">
-                <param name="viewTarget">flashtimeline</param>
-              </module>
-            </module>
-          </module>
-        </module>
-      </module>
-      <!-- Table -->
-      <module name="NullModule" layoutPanel="panel_row3_col1_grp2">
-        <module name="JobProgressIndicator"></module>
-        <module name="SimpleResultsTable">
-          <param name="drilldown">row</param>
-          <module name="ConvertToDrilldownSearch">
-            <module name="ViewRedirector">
-              <param name="viewTarget">flashtimeline</param>
-            </module>
-          </module>
-        </module>
-        <module name="ViewRedirectorLink">
-          <param name="viewTarget">flashtimeline</param>
-        </module>
-      </module>
-    </module>
-  </module>
-
-<!-- Changes by Host -->
-  <module name="TimeRangePicker" layoutPanel="panel_row4_col1" group="Changes by Host">
-    <param name="selected">Last 15 Minutes</param>
-    <param name="searchWhenChanged">True</param>
-    <module name="HiddenSavedSearch">
+    <module name="HiddenSavedSearch" layoutPanel="panel_row3_col1"
+        group="Changes by Host">
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_changes_by_host</param>
-      <!-- Chart -->
-      <module name="NullModule" layoutPanel="panel_row4_col1_grp1">
-        <module name="HiddenChartFormatter">
-          <param name="chart">pie</param>
-          <module name="JSChart">
-            <param name="height">100%</param>
-            <module name="ConvertToDrilldownSearch">
-              <module name="ViewRedirector">
-                <param name="viewTarget">flashtimeline</param>
-              </module>
-            </module>
-          </module>
-        </module>
-      </module>
-      <!-- Table -->
-      <module name="NullModule" layoutPanel="panel_row4_col1_grp2">
-        <module name="JobProgressIndicator"></module>
-        <module name="SimpleResultsTable">
-          <param name="drilldown">row</param>
+      <module name="JobProgressIndicator"></module>
+      <module name="HiddenChartFormatter">
+        <param name="chart">pie</param>
+        <module name="JSChart">
           <module name="ConvertToDrilldownSearch">
             <module name="ViewRedirector">
               <param name="viewTarget">flashtimeline</param>
             </module>
           </module>
         </module>
-        <module name="ViewRedirectorLink">
-          <param name="viewTarget">flashtimeline</param>
-        </module>
+      </module>
+      <module name="ViewRedirectorLink">
+        <param name="viewTarget">flashtimeline</param>
       </module>
     </module>
-  </module>
+
+    <module name="HiddenSavedSearch" layoutPanel="panel_row3_col2"
+        group="Changes by Class">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_changes_by_class</param>
+      <module name="JobProgressIndicator"></module>
+      <module name="HiddenChartFormatter">
+        <param name="chart">pie</param>
+        <module name="JSChart">
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+      </module>
+      <module name="ViewRedirectorLink">
+        <param name="viewTarget">flashtimeline</param>
+      </module>
+    </module>
+
+    <module name="HiddenSavedSearch" layoutPanel="panel_row3_col3"
+        group="Changes by Resource Type">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_changes_by_resource_type</param>
+      <module name="JobProgressIndicator"></module>
+      <module name="HiddenChartFormatter">
+        <param name="chart">pie</param>
+        <module name="JSChart">
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+      </module>
+      <module name="ViewRedirectorLink">
+        <param name="viewTarget">flashtimeline</param>
+      </module>
+    </module>
+
+    <module name="HiddenSavedSearch" layoutPanel="panel_row4_col1"
+        group="Errors by Host">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_errors_by_host</param>
+      <module name="JobProgressIndicator"></module>
+      <module name="HiddenChartFormatter">
+        <param name="chart">pie</param>
+        <module name="JSChart">
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+      </module>
+      <module name="ViewRedirectorLink">
+        <param name="viewTarget">flashtimeline</param>
+      </module>
+    </module>
+
+    <module name="HiddenSavedSearch" layoutPanel="panel_row4_col2"
+        group="Errors by Class">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_errors_by_class</param>
+      <module name="JobProgressIndicator"></module>
+      <module name="HiddenChartFormatter">
+        <param name="chart">pie</param>
+        <module name="JSChart">
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+      </module>
+      <module name="ViewRedirectorLink">
+        <param name="viewTarget">flashtimeline</param>
+      </module>
+    </module>
+
+    <module name="HiddenSavedSearch" layoutPanel="panel_row4_col3"
+        group="Errors by Resource Type">
+      <param name="autoRun">true</param>
+      <param name="savedSearch">puppet_errors_by_resource_type</param>
+      <module name="JobProgressIndicator"></module>
+      <module name="HiddenChartFormatter">
+        <param name="chart">pie</param>
+        <module name="JSChart">
+          <module name="ConvertToDrilldownSearch">
+            <module name="ViewRedirector">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+      </module>
+      <module name="ViewRedirectorLink">
+        <param name="viewTarget">flashtimeline</param>
+      </module>
+    </module>
+
+  </module><!-- TimeRangePicker -->
 
 </view>
