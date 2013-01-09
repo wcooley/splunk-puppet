@@ -78,3 +78,53 @@ ul.accountBarItems li:hover, ul.accountBarItems a:hover, .auxLinks a:hover {
 .splEvent-et_teal    .t { color:#099; }
 .splEvent-et_yellow  .t { color:#990; }
 
+.SingleValue {
+    clear:left;
+    float:left;
+}
+.SingleValue .SingleValueHolder {
+    background-image:none;
+    background-color:transparent;
+    width:auto;
+//    font-size:15px;
+//    font-weight:normal;
+    text-align:left;
+    color:#111;
+    font-weight: 300;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+.SingleValue .singleResult {
+//    font-size:16px;
+//    font-weight:300;
+    color:#111;
+}
+
+.dashboardCell .SingleValueHolder {
+    padding:3px 5px 1px 20px;
+    background-image:url(images/traffic_light_green.png);
+    background-repeat:no-repeat;
+    background-position:0px 7px;
+}
+
+.SingleValue .severe {
+    background-image:url(images/traffic_light_red.png);
+    background-repeat:no-repeat;
+    background-position:1px 8px;
+}
+
+.SingleValue .high {
+    background-image:url(images/traffic_light_yellow.png);
+    background-repeat:no-repeat;
+    background-position:1px 8px;
+}
+
+.SingleValue .elevated {
+    background-image:url(images/traffic_light_yellow.png);
+    background-repeat:no-repeat;
+    background-position:1px 8px;
+}
