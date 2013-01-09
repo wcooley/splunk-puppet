@@ -65,10 +65,10 @@ eventtypes, macros and saved searches (should) use this.
 
 These final searches should differentiate agent, master and cimlog events. I
 have an extraction for the process name, so am able to match on
-`process=puppet-agent` and such, but I am uncertain if this was a default
-extraction or one I configured. If you do not have this, then just matching on
-'puppet-agent' or 'puppet-master' should suffice. Note that the agent & master
-searches should exclude cimlog events.
+`process=puppet-agent` and such, but I am uncertain if the `process` field was
+a default extraction or one I configured. If you do not have this, then just
+matching on 'puppet-agent' or 'puppet-master' should suffice. Note that the
+agent & master searches should exclude cimlog events.
 
 Other Setup
 -----------
