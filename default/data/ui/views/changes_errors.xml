@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <view template="dashboard.html">
-  <label>Statistics</label>
+  <label>Changes &amp; Errors</label>
   <module name="AccountBar" layoutPanel="navigationHeader"></module>
   <module name="AppBar" layoutPanel="navigationHeader"></module>
   <module name="Message" layoutPanel="messaging">

@@ -1,8 +1,8 @@
 <nav>
     <view name="overview" default='true'/>
     <view name="flashtimeline"/>
-    <view name="changes"/>
-    <view name="statistics"/>
+    <view name="node"/>
+    <view name="changes_errors"/>
     <view name="agent_anamolies"/>
   <collection label="Views">
     <view name="charting" />
