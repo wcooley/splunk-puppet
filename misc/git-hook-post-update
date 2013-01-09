@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Name: hooks/post-update
+# Desc: Git post-update hook
+#
+# This script generates syslog messages for each non-merge commit that it
+# receives. The idea is to be able to quickly correlate git commits to the
+# Puppet repository with Puppet breakage.
+#
+
+GIT_DIR=$(git rev-parse --git-dir)
+
+desc=$(head -n1 $GIT_DIR/description)
+
+# Redirect stdout & stderr using process substitution to 'logger'
+exec > >(logger -t "git-post-update" -i -p user.info)
+exec 2> >(logger -t "git-post-update" -i -p user.err)
+
+for ref in "$@"; do
+    git log -1 --no-merges \
+        --format="git_repo=\"$desc\" git_commit=\"%h\" git_author=\"%ae\" git_subject=\"%s\"" \
+        "$ref"
+done
