@@ -85,7 +85,20 @@ processor, written to format and log data for ease of consumption by Splunk.
 To gather version information, add the following to your manifests (I have it
 towards the top of my site.pp, outside of any node definitions):
 
- `info("node=${hostname} puppetversion=${puppetversion}")`
+    info("node=${hostname} puppetversion=${puppetversion}")
+
+#### Commit Tracking ####
+
+If your Puppet master config is managed with Git, `misc/git-hook-post-update`
+is a post-update hook which logs commits as they enter your repository, which
+can be useful for narrowing down which commit started causing errors.
+
+To use, copy it to the `$MASTER_REPO.git/hooks/` or `/etc/puppet/.git/hooks`
+directory of your Puppet master repository and ensure it is executable. (I use
+the former directory, but I expect that the latter works too, but consider how
+the commit log time stamps will relate to Puppet events.)
+
+Sample scripts for other VCSs would be a welcome contribution.
 
 #### Splunk Free vs Enterprise ####
 
