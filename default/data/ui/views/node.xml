@@ -12,8 +12,8 @@
     <param name="actionsMenuFilter">dashboard</param>
   </module>
 
-  <module name="SearchSelectLister" layoutPanel="viewHeader">
-    <param name="label">Nodes</param>
+  <module name="SearchSelectLister" layoutPanel="mainSearchControls">
+    <param name="label">Node</param>
     <param name="settingToCreate">node_setting</param>
     <param name="search">| `puppet_hosts_seen` |sort host</param>
     <param name="searchWhenChanged">True</param>
@@ -34,17 +34,23 @@
           </param>
         </param>
       </param>
-      <module name="TimeRangePicker" layoutPanel="viewHeader">
+      <module name="TimeRangePicker" layoutPanel="mainSearchControls">
         <param name="searchWhenChanged">True</param>
         <param name="selected">Last 15 Minutes</param>
 
+
+<module name="TabSwitcher" layoutPanel="viewHeader">
+  <!--<param name="label">Check it out</param>-->
+  <param name="mode">independent</param>
+
+    <module name="NullModule" group="Resources">
         <module name="HiddenSearch">
           <param name="search">host=$host$ eventtype=puppet_agent_error</param>
           <module name="HiddenPostProcess">
               <param name="search">stats count | rangemap field=count low=0-0 elevated=1-20 severe=21-10000 default=low</param>
             <module name="SingleValue" layoutPanel="panel_row3_col1_grp1">
                 <param name="beforeLabel">Errors:</param>
-                <param name="field">count</param>
+                <!-- <param name="field">count</param> -->
                 <param name="classField">range</param>
             </module>
           </module>
@@ -63,7 +69,7 @@
           <module name="HiddenPostProcess">
               <param name="search">rangemap field=catalog_run_time low=0-30 elevated=31-80 default=severe</param>
 
-                <module name="SingleValue" layoutPanel="panel_row3_col2_grp1">
+                <module name="SingleValue" layoutPanel="panel_row3_col1_grp1">
                     <param name="afterLabel">s</param>
                     <param name="beforeLabel">Runtime:</param>
                     <param name="field">catalog_run_time</param>
@@ -76,7 +82,7 @@
           <param name="search">`puppet_agent_run_time($host$)`</param>
           <module name="HiddenPostProcess">
             <param name="search">dedup host| reltime</param>
-            <module name="SingleValue" layoutPanel="panel_row3_col2_grp2">
+            <module name="SingleValue" layoutPanel="panel_row3_col1_grp2">
                 <param name="beforeLabel">Last run:</param>
               <param name="format">none</param>
               <param name="field">reltime</param>
@@ -86,112 +92,78 @@
 
         <module name="HiddenSearch">
           <param name="search">node=$host$  `puppet_version`| table version</param>
-          <module name="SingleValue" layoutPanel="panel_row3_col3_grp1">
+          <module name="SingleValue" layoutPanel="panel_row3_col1_grp1">
               <param name="beforeLabel">Version:</param>
             <param name="field">version</param>
             <param name="format">none</param>
           </module>
         </module>
-
+        <!--
         <module name="HiddenSearch">
           <param name="search">dest=$host$ eventtype=puppet_cimlog_metrics category="events"|fillnull success, failure, noop|stats avg(success) AS success, avg(failure) AS failure, avg(noop) AS noop|eval success=round(success)|eval failure=round(failure)|eval noop=round(noop)</param>
           <module name="SimpleResultsTable" layoutPanel="panel_row3_col3_grp2"></module>
         </module>
+        -->
 
-    <module name="StaticSelect" layoutPanel="panel_row4_col1">
-      <param name="label">Log Type</param>
-      <param name="settingToCreate">eventtype</param>
-      <param name="searchWhenChanged">True</param>
-      <param name="staticFieldsToDisplay">
-        <list>
-          <param name="label">Agent</param>
-          <param name="value">puppet_agent</param>
-        </list>
-        <list>
-          <param name="label">Master</param>
-          <param name="value">puppet_master</param>
-        </list>
-        <list>
-          <param name="label">CIM Log</param>
-          <param name="value">puppet_cimlog</param>
-        </list>
-      </param>
-      <module name="ConvertToIntention">
-        <param name="settingToConvert">eventtype</param>
-        <param name="intention">
-          <param name="name">addterm</param>
-          <param name="arg">
-            <param name="eventtype">$target$
-              <!--
-              <para name="value">$target$</para>
-              <param name="fillOnEmpty">True</param> -->
-            </param>
-          </param>
-        </param>
-        
-
-        <module name="HiddenSearch">
-          <param name="search">`puppet_logs_for_host($host$)`</param>               
-
-                <module name="Paginator" layoutPanel="panel_row4_col1">
-                    <param name="entityName">events</param>
-                  <param name="maxPages">10</param>
-                  <module name="SoftWrap" layoutPanel="panel_row4_col1">
-                    <param name="enable">True</param>
-                    <module name="RowNumbers">
-                      <module name="MaxLines">
-                        <param name="options">
-                          <list>
-                            <param name="text">10</param>
-                            <param name="value">10</param>
-                          </list>
-                          <list>
-                            <param name="text">20</param>
-                            <param name="value">20</param>
-                          </list>
-                          <list>
-                            <param name="text">50</param>
-                            <param name="value">50</param>
-                          </list>
-                          <list>
-                            <param name="text">All</param>
-                            <param name="value">0</param>
-                          </list>
-                        </param>
-                        <module name="Segmentation">
-                          <param name="options">
-                            <list>
-                              <param name="text">inner</param>
-                              <param name="selected">True</param>
-                              <param name="value">inner</param>
-                            </list>
-                            <list>
-                              <param name="text">outer</param>
-                              <param name="value">outer</param>
-                            </list>
-                            <list>
-                              <param name="text">full</param>
-                              <param name="value">full</param>
-                            </list>
-                            <list>
-                              <param name="text">raw</param>
-                              <param name="value">raw</param>
-                            </list>
-                          </param>
-                          <module name="EventsViewer" layoutPanel="panel_row4_col1">
-                            <param name="segmentation">full</param>
-                            <param name="reportFieldLink">report_builder_format_report</param>
-                          </module>
-                        </module>
-                      </module>
-                    </module>
-                  </module>
-                </module>
-              </module>
-            </module>
+        <module name="HiddenSearch" layoutPanel="panel_row4_col1">
+          <param name="search">eventtype=puppet_cimlog_metrics category=time dest=$host$|head 1|fields rtime*|fillnull value="N/A" |table rtime*| transpose 1|rename column AS Resource | rename "row 1" AS "Application Time (s)"|eval Resource=replace(Resource, "rtime_", "")</param>
+          <module name="SimpleResultsTable">
+            <param name="count">100</param>
+            <param name="displayRowNumbers">false</param>
+          </module>
         </module>
 
       </module>
-    </module>
+
+        <module name="StaticSelect" group="Log events" layoutPanel="panel_row3_col1">
+          <param name="label">Log Type</param>
+          <param name="settingToCreate">eventtype</param>
+          <param name="searchWhenChanged">True</param>
+          <param name="staticFieldsToDisplay">
+            <list>
+              <param name="label">Agent</param>
+              <param name="value">puppet_agent</param>
+            </list>
+            <list>
+              <param name="label">Master</param>
+              <param name="value">puppet_master</param>
+            </list>
+            <list>
+              <param name="label">CIM Log</param>
+              <param name="value">puppet_cimlog</param>
+            </list>
+            <list>
+              <param name="label">All Logs</param>
+              <param name="value">puppet</param>
+            </list>
+          </param>
+
+          <module name="ConvertToIntention">
+            <param name="settingToConvert">eventtype</param>
+            <param name="intention">
+              <param name="name">addterm</param>
+              <param name="arg">
+                <param name="eventtype">$target$</param>
+              </param>
+            </param>
+
+            <module name="HiddenSearch">
+              <param name="search">`puppet_logs_for_host($host$)`</param>
+                <module name="Paginator">
+                    <param name="entityName">events</param>
+                    <param name="maxPages">10</param>
+                  <module name="EventsViewer" layoutPanel="panel_row4_col1">
+                    <param name="segmentation">full</param>
+                    <param name="reportFieldLink">report_builder_format_report</param>
+                  </module>
+                </module>
+              </module>
+
+          </module><!-- ConvertToIntention: eventtype -->
+
+        </module><!-- StaticSelect: eventtype -->
+</module><!-- PulldownSwitcher -->
+      </module>
+    </module><!-- ConvertToIntention: node_setting -->
   </module>
 </view>
