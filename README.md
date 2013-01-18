@@ -85,7 +85,7 @@ processor, written to format and log data for ease of consumption by Splunk.
 To gather version information, add the following to your manifests (I have it
 towards the top of my site.pp, outside of any node definitions):
 
-    info("node=${hostname} puppetversion=${puppetversion}")
+    info("node=${::hostname} puppetversion=${::puppetversion}")
 
 #### Commit Tracking ####
 
