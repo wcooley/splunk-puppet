@@ -6,4 +6,4 @@ category: Category
 ---
 ## Overview
 
-How about some [screenshots](screenshots)?
+How about some [screenshots](screenshots.html)?
