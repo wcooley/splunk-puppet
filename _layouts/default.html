@@ -1,0 +1,63 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+{% include site_vars.html %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>{{ page.title | capitalize }} - {{ site_title }}</title>
+  {% if page.description %}
+  <meta name="description" content="{{ page.description }}">
+  {% endif %}
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    {% include site_title.html %}
+    <div id="container">
+        <p class="tagline">{{ page.title }}</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/wcooley/splunk-puppet/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/wcooley/splunk-puppet/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/wcooley/splunk-puppet" class="code">View {{ site_title }} on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+        {{ content }}
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+          <p><a href="https://github.com/wcooley" class="avatar"><img src="https://secure.gravatar.com/avatar/d61a77bfbd592fba1635d05b96000191?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/wcooley">wcooley</a> maintains <a href="https://github.com/wcooley/splunk-puppet">{{ site_title }}</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/wcooley/splunk-puppet/tarball/master" class="tar">tar</a><a href="https://github.com/wcooley/splunk-puppet/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
