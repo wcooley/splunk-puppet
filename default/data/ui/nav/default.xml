@@ -2,7 +2,10 @@
     <view name="overview" default='true'/>
     <view name="flashtimeline"/>
     <view name="node"/>
+  <collection label="Changes &amp; Errors">
     <view name="changes_errors"/>
+    <view name="top_errors"/>
+  </collection>
     <view name="agent_anamolies"/>
   <collection label="Views">
     <view name="charting" />
