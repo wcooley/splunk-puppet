@@ -12,8 +12,22 @@
     <param name="actionsMenuFilter">dashboard</param>
   </module>
 
-  <module name="NullModule" layoutPanel="panel_row2_col1" group="General">
-  <module name="HiddenSearch" layoutPanel="panel_row2_col1">
+  <module name="NullModule" layoutPanel="panel_row2_col1_grp1" group="General">
+
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col2">
+    <param name="autoRun">true</param>
+    <param name="savedSearch">Puppet-Git: Recent Commits</param>
+    <module name="JobProgressIndicator">
+      <module name="Paginator">
+        <param name="entityName">events</param>
+        <module name="SimpleResultsTable">
+          <param name="displayRowNumbers">false</param>
+        </module>
+      </module>
+    </module>
+  </module>
+
+  <module name="HiddenSearch" layoutPanel="panel_row2_col1_grp1">
       <param name="autoRun">true</param>
     <param name="search">| inputlookup puppet_hosts_last_seen.csv| stats dc(host) AS count </param>
     <module name="SingleValue">
@@ -22,7 +36,7 @@
     </module>
   </module>
 
-  <module name="HiddenSearch" layoutPanel="panel_row2_col1">
+  <module name="HiddenSearch" layoutPanel="panel_row2_col1_grp1">
       <param name="autoRun">true</param>
     <param name="search">| inputlookup puppet_hosts_last_seen.csv| dedup master| stats count</param>
     <module name="SingleValue">
@@ -31,7 +45,7 @@
     </module>
   </module>
 
-  <module name="HiddenSearch" layoutPanel="panel_row2_col1">
+  <module name="HiddenSearch" layoutPanel="panel_row2_col1_grp1">
       <param name="autoRun">true</param>
     <param name="search">| inputlookup puppet_hosts_last_seen.csv| dedup environment | stats count</param>
     <module name="SingleValue">
@@ -41,12 +55,12 @@
   </module>
   </module>
 
-  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col2"
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1_grp1"
       group="Puppet Versions" autoRun="True">
     <param name="savedSearch">Puppet Versions: Chart</param>
     <param name="groupLabel">Puppet Versions</param>
 
-    <module name="HiddenPostProcess" layoutPanel="panel_row2_col1">
+    <module name="HiddenPostProcess" layoutPanel="panel_row2_col1_grp1">
       <param name="search">stats dc(puppetversion) AS count</param>
       <module name="SingleValue">
         <param name="beforeLabel">Distinct Versions: </param>
@@ -79,4 +93,63 @@
         </module>
       </module>
   </module>
+
+
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col2" group="Commits &amp; Error Rate" autoRun="True">
+    <param name="savedSearch">Timechart - Rate of Errors</param>
+    <param name="groupLabel">Commits &amp; Error Rate</param>
+    <module name="ViewstateAdapter">
+      <param name="suppressionList">
+        <item>charting.chart.stackMode</item>
+        <item>charting.secondaryAxis.minimumNumber</item>
+        <item>charting.chart</item>
+        <item>charting.axisTitleY.text</item>
+        <item>charting.secondaryAxisTitle.text</item>
+        <item>charting.legend.placement</item>
+        <item>charting.primaryAxisTitle.text</item>
+        <item>charting.chart.nullValueMode</item>
+        <item>charting.chart.showMarkers</item>
+        <item>charting.axisTitleX.text</item>
+        <item>charting.secondaryAxis.maximumNumber</item>
+        <item>charting.secondaryAxis.scale</item>
+        <item>charting.layout.splitSeries</item>
+      </param>
+      <param name="savedSearch">Timechart - Rate of Errors</param>
+      <module name="HiddenFieldPicker">
+        <param name="strictMode">True</param>
+        <module name="JobProgressIndicator">
+          <module name="EnablePreview">
+            <param name="enable">True</param>
+            <param name="display">False</param>
+            <module name="HiddenChartFormatter">
+              <param name="charting.chart.stackMode">default</param>
+              <param name="charting.secondaryAxis.minimumNumber">""</param>
+              <param name="charting.chart">area</param>
+              <param name="charting.axisTitleY.text">Total</param>
+              <param name="charting.legend.placement">right</param>
+              <param name="charting.chart.nullValueMode">gaps</param>
+              <param name="charting.chart.showMarkers">false</param>
+              <param name="charting.axisTitleX.text">Time</param>
+              <param name="charting.secondaryAxis.maximumNumber">""</param>
+              <param name="charting.secondaryAxis.scale">""</param>
+              <param name="charting.layout.splitSeries">false</param>
+              <module name="JSChart">
+                <param name="width">100%</param>
+                <module name="Gimp"/>
+                <module name="ConvertToDrilldownSearch">
+                  <module name="ViewRedirector">
+                    <param name="viewTarget">flashtimeline</param>
+                  </module>
+                </module>
+              </module>
+              <module name="ViewRedirectorLink">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
+            </module>
+          </module>
+        </module>
+      </module>
+    </module>
+  </module>
+
 </view>
