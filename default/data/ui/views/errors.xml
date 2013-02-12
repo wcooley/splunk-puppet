@@ -36,20 +36,25 @@
     <module name="HiddenSavedSearch">
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_errors_by_host</param>
+
       <!-- Chart -->
       <module name="NullModule" layoutPanel="panel_row4_col1_grp1">
-        <module name="HiddenChartFormatter">
-          <param name="chart">pie</param>
-          <module name="JSChart">
-            <param name="height">100%</param>
-            <module name="ConvertToDrilldownSearch">
-              <module name="ViewRedirector">
-                <param name="viewTarget">flashtimeline</param>
+        <module name="HiddenPostProcess">
+          <param name="search">fields - sparkline</param>
+          <module name="HiddenChartFormatter">
+            <param name="chart">pie</param>
+            <module name="JSChart">
+              <param name="height">100%</param>
+              <module name="ConvertToDrilldownSearch">
+                <module name="ViewRedirector">
+                  <param name="viewTarget">flashtimeline</param>
+                </module>
               </module>
             </module>
           </module>
         </module>
       </module>
+
       <!-- Table -->
       <module name="NullModule" layoutPanel="panel_row4_col1_grp2">
         <module name="JobProgressIndicator"></module>
@@ -75,20 +80,25 @@
     <module name="HiddenSavedSearch">
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_errors_by_class</param>
+
       <!-- Chart -->
       <module name="NullModule" layoutPanel="panel_row3_col1_grp1">
-        <module name="HiddenChartFormatter">
-          <param name="chart">pie</param>
-          <module name="JSChart">
-            <param name="height">100%</param>
-            <module name="ConvertToDrilldownSearch">
-              <module name="ViewRedirector">
-                <param name="viewTarget">flashtimeline</param>
+        <module name="HiddenPostProcess">
+          <param name="search">fields - sparkline</param>
+          <module name="HiddenChartFormatter">
+            <param name="chart">pie</param>
+            <module name="JSChart">
+              <param name="height">100%</param>
+              <module name="ConvertToDrilldownSearch">
+                <module name="ViewRedirector">
+                  <param name="viewTarget">flashtimeline</param>
+                </module>
               </module>
             </module>
           </module>
         </module>
       </module>
+
       <!-- Table -->
       <module name="NullModule" layoutPanel="panel_row3_col1_grp2">
         <module name="JobProgressIndicator"></module>
@@ -105,6 +115,7 @@
         </module>
       </module>
     </module>
+
   </module>
 
   <!-- Errors by Resource Type -->
@@ -114,20 +125,25 @@
     <module name="HiddenSavedSearch">
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_errors_by_resource_type</param>
+
       <!-- Chart -->
       <module name="NullModule" layoutPanel="panel_row2_col1_grp1">
-        <module name="HiddenChartFormatter">
-          <param name="chart">pie</param>
-          <module name="JSChart">
-            <param name="height">100%</param>
-            <module name="ConvertToDrilldownSearch">
-              <module name="ViewRedirector">
-                <param name="viewTarget">flashtimeline</param>
+        <module name="HiddenPostProcess">
+          <param name="search">fields - sparkline</param>
+          <module name="HiddenChartFormatter">
+            <param name="chart">pie</param>
+            <module name="JSChart">
+              <param name="height">100%</param>
+              <module name="ConvertToDrilldownSearch">
+                <module name="ViewRedirector">
+                  <param name="viewTarget">flashtimeline</param>
+                </module>
               </module>
             </module>
           </module>
         </module>
       </module>
+
       <!-- Table -->
       <module name="NullModule" layoutPanel="panel_row2_col1_grp2">
         <module name="JobProgressIndicator"></module>

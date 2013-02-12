@@ -89,12 +89,15 @@
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_changes_by_resource_type</param>
       <module name="JobProgressIndicator"></module>
-      <module name="HiddenChartFormatter">
-        <param name="chart">pie</param>
-        <module name="JSChart">
-          <module name="ConvertToDrilldownSearch">
-            <module name="ViewRedirector">
-              <param name="viewTarget">flashtimeline</param>
+      <module name="HiddenPostProcess">
+        <param name="search">fields - sparkline</param>
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
             </module>
           </module>
         </module>
@@ -109,12 +112,15 @@
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_errors_by_host</param>
       <module name="JobProgressIndicator"></module>
-      <module name="HiddenChartFormatter">
-        <param name="chart">pie</param>
-        <module name="JSChart">
-          <module name="ConvertToDrilldownSearch">
-            <module name="ViewRedirector">
-              <param name="viewTarget">flashtimeline</param>
+      <module name="HiddenPostProcess">
+        <param name="search">fields - sparkline</param>
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
             </module>
           </module>
         </module>
@@ -129,12 +135,15 @@
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_errors_by_class</param>
       <module name="JobProgressIndicator"></module>
-      <module name="HiddenChartFormatter">
-        <param name="chart">pie</param>
-        <module name="JSChart">
-          <module name="ConvertToDrilldownSearch">
-            <module name="ViewRedirector">
-              <param name="viewTarget">flashtimeline</param>
+      <module name="HiddenPostProcess">
+        <param name="search">fields - sparkline</param>
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
             </module>
           </module>
         </module>
@@ -149,12 +158,15 @@
       <param name="autoRun">true</param>
       <param name="savedSearch">puppet_errors_by_resource_type</param>
       <module name="JobProgressIndicator"></module>
-      <module name="HiddenChartFormatter">
-        <param name="chart">pie</param>
-        <module name="JSChart">
-          <module name="ConvertToDrilldownSearch">
-            <module name="ViewRedirector">
-              <param name="viewTarget">flashtimeline</param>
+      <module name="HiddenPostProcess">
+        <param name="search">fields - sparkline</param>
+        <module name="HiddenChartFormatter">
+          <param name="chart">pie</param>
+          <module name="JSChart">
+            <module name="ConvertToDrilldownSearch">
+              <module name="ViewRedirector">
+                <param name="viewTarget">flashtimeline</param>
+              </module>
             </module>
           </module>
         </module>
