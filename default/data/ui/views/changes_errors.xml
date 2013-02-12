@@ -17,7 +17,7 @@
 
 -->
 <view template="dashboard.html">
-  <label>Changes &amp; Errors</label>
+  <label>Changes vs Errors</label>
   <module name="AccountBar" layoutPanel="navigationHeader"></module>
   <module name="AppBar" layoutPanel="navigationHeader"></module>
   <module name="Message" layoutPanel="messaging">
