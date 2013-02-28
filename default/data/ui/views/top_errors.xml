@@ -100,4 +100,38 @@
       </module>
     </module>
   </module>
+  <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" group="Top Deprecation Warnings" autoRun="True">
+    <param name="savedSearch">Chart: Top deprecation messages</param>
+    <param name="groupLabel">Top Deprecation Messages</param>
+    <module name="ViewstateAdapter">
+      <param name="suppressionList"/>
+      <param name="savedSearch">Chart: Top deprecation messages</param>
+      <module name="HiddenFieldPicker">
+        <param name="strictMode">True</param>
+        <module name="JobProgressIndicator"/>
+        <module name="Paginator">
+          <param name="count">10</param>
+          <param name="entityName">results</param>
+          <module name="EnablePreview">
+            <param name="enable">True</param>
+            <param name="display">False</param>
+            <module name="SimpleResultsTable">
+              <param name="drilldown">row</param>
+              <param name="entityName">results</param>
+              <param name="allowTransformedFieldSelect">True</param>
+              <module name="Gimp"/>
+              <module name="ConvertToDrilldownSearch">
+                <module name="ViewRedirector">
+                  <param name="viewTarget">flashtimeline</param>
+                </module>
+              </module>
+            </module>
+            <module name="ViewRedirectorLink">
+              <param name="viewTarget">flashtimeline</param>
+            </module>
+          </module>
+        </module>
+      </module>
+    </module>
+  </module>
 </view>
