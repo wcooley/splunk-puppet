@@ -36,5 +36,7 @@
   </collection>
     <collection label="Searches &amp; Reports">
         <saved source="unclassified" />
+        <divider />
+        <a href="/manager/search/saved/searches">Manage Searches &amp; Reports</a>
     </collection>
 </nav>
