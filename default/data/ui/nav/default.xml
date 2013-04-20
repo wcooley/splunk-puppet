@@ -35,6 +35,16 @@
     <a href="javascript:Splunk.Globals.Viewmaster.openDashCreateForm();">Create dashboard...</a>
   </collection>
     <collection label="Searches &amp; Reports">
+        <collection label="Internal Searches">
+            <collection label="Probably should not run these manually">
+                <collection label="Lookup Tables">
+                    <saved source="unclassified" match="Lookup table: "/>
+                </collection>
+                <collection label="Summary Indexing">
+                    <saved source="unclassified" match="Summary: "/>
+                </collection>
+            </collection>
+        </collection>
         <saved source="unclassified" />
         <divider />
         <a href="/manager/search/saved/searches">Manage Searches &amp; Reports</a>
