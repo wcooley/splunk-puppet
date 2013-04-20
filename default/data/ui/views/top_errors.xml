@@ -33,11 +33,11 @@
     <param name="level">warn</param>
   </module>
   <module name="HiddenSavedSearch" layoutPanel="panel_row1_col1" group="Top Puppet Agent Errors" autoRun="True">
-    <param name="savedSearch">Top Puppet Agent Errors</param>
+    <param name="savedSearch">Chart: Top Puppet Agent Errors</param>
     <param name="groupLabel">Top Puppet Agent Errors</param>
     <module name="ViewstateAdapter">
       <param name="suppressionList"/>
-      <param name="savedSearch">Top Puppet Agent Errors</param>
+      <param name="savedSearch">Chart: Top Puppet Agent Errors</param>
       <module name="HiddenFieldPicker">
         <param name="strictMode">True</param>
         <module name="JobProgressIndicator"/>
@@ -67,11 +67,11 @@
     </module>
   </module>
   <module name="HiddenSavedSearch" layoutPanel="panel_row1_col2" group="Top Puppet Master Errors" autoRun="True">
-    <param name="savedSearch">Top Puppet Master Errors</param>
+    <param name="savedSearch">Chart: Top Puppet Master Errors</param>
     <param name="groupLabel">Top Puppet Master Errors</param>
     <module name="ViewstateAdapter">
       <param name="suppressionList"/>
-      <param name="savedSearch">Top Puppet Master Errors</param>
+      <param name="savedSearch">Chart: Top Puppet Master Errors</param>
       <module name="HiddenFieldPicker">
         <param name="strictMode">True</param>
         <module name="JobProgressIndicator"/>
@@ -101,11 +101,11 @@
     </module>
   </module>
   <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" group="Top Deprecation Warnings" autoRun="True">
-    <param name="savedSearch">Chart: Top deprecation messages</param>
+    <param name="savedSearch">Chart: Top Deprecation Messages</param>
     <param name="groupLabel">Top Deprecation Messages</param>
     <module name="ViewstateAdapter">
       <param name="suppressionList"/>
-      <param name="savedSearch">Chart: Top deprecation messages</param>
+      <param name="savedSearch">Chart: Top Deprecation Messages</param>
       <module name="HiddenFieldPicker">
         <param name="strictMode">True</param>
         <module name="JobProgressIndicator"/>
