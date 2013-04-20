@@ -1,10 +1,10 @@
 .appLogo {
-    height: 54px;
-    width: 142px;
+    height: 50px;
+    width: 221px;
     padding-right: 5px;
     float: left;
     background: url(pictures/appLogo_puppet.png) left center no-repeat;
-    opacity: 0.5;
+    opacity: 0.90;
     -webkit-transition: 0.33s linear;
     -moz-transition: 0.33s linear;
 }
@@ -19,13 +19,13 @@
 
 .appHeaderWrapper {
     color: #747380;
-    background-color: #38344B;
+    background-color: #242563;
     background-image: none;
 }
 
 ul.appBarNav li.hasMenu a:hover, ul.appBarNav li a:hover
 {
-    background: #4C3272;
+    background: #242563;
     color: white;
 }
 
@@ -43,7 +43,7 @@ ul.appBarNav li.hasMenu a:hover, ul.appBarNav li a:hover
 }
 
 ul.accountBarItems li:hover, ul.accountBarItems a:hover, .auxLinks a:hover {
-    background-color: #4C3272;
+    background-color: #242563;
     color: white;
     text-decoration: none;
 }
@@ -56,7 +56,7 @@ ul.accountBarItems li:hover, ul.accountBarItems a:hover, .auxLinks a:hover {
 .appHeaderWrapper a.help:hover,
 .auxLinks a.help:hover {
     background-image: url(../../../img/skins/default/icon-help-12.png) no-repeat left center;
-    background-color: #4C3272;
+    background-color: #242563;
     color: white;
     text-decoration: none;
 }
@@ -64,7 +64,7 @@ ul.accountBarItems li:hover, ul.accountBarItems a:hover, .auxLinks a:hover {
 .splHeader-dashboard h2,
 .dashboardContent .ServerSideInclude h2,
 .dashboardContent .GenericHeader h3 {
-    color: #38344B;
+    color: #242563;
 }
 
 # classes used by eventtype renderer
