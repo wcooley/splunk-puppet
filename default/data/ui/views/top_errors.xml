@@ -32,6 +32,10 @@
     <param name="maxSize">1</param>
     <param name="level">warn</param>
   </module>
+
+  <module name="TimeRangePicker" layoutPanel="panel_row1_col1" group="Top Puppet Agent Errors">
+    <param name="selected">Last 15 Minutes</param>
+    <param name="searchWhenChanged">True</param>
   <module name="HiddenSavedSearch" layoutPanel="panel_row1_col1" group="Top Puppet Agent Errors" autoRun="True">
     <param name="savedSearch">Chart: Top Puppet Agent Errors</param>
     <param name="groupLabel">Top Puppet Agent Errors</param>
@@ -66,6 +70,11 @@
       </module>
     </module>
   </module>
+  </module>
+
+  <module name="TimeRangePicker" layoutPanel="panel_row1_col2" group="Top Puppet Master Errors">
+    <param name="selected">Last 15 Minutes</param>
+    <param name="searchWhenChanged">True</param>
   <module name="HiddenSavedSearch" layoutPanel="panel_row1_col2" group="Top Puppet Master Errors" autoRun="True">
     <param name="savedSearch">Chart: Top Puppet Master Errors</param>
     <param name="groupLabel">Top Puppet Master Errors</param>
@@ -100,6 +109,11 @@
       </module>
     </module>
   </module>
+  </module>
+
+  <module name="TimeRangePicker" layoutPanel="panel_row2_col1" group="Top Deprecation Warnings">
+    <param name="selected">Last 15 Minutes</param>
+    <param name="searchWhenChanged">True</param>
   <module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" group="Top Deprecation Warnings" autoRun="True">
     <param name="savedSearch">Chart: Top Deprecation Messages</param>
     <param name="groupLabel">Top Deprecation Messages</param>
@@ -134,4 +148,6 @@
       </module>
     </module>
   </module>
+  </module>
+
 </view>
