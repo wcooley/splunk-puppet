@@ -29,15 +29,22 @@ Installation & Setup
 
 The following are explanations of setup options within Splunk's app setup.
 
-#### Puppet Hosts ####
+#### Puppet Host Inventory ####
 
-The script `bin/puppethosts.py` connects to the Puppet master's inventory
-service to generate a list of known hosts which have been managed by Puppet.
-For this script to work, it needs to be able to read the private key of the
-host on which it is running, which it should be able to do if Splunk is running
-as root. If Splunk is not running as root, other arrangements have to be
-made--giving the Splunk user read access to the key, creating a separate key &
-cert in ~splunk/.puppet, etc.
+The script `bin/puppethosts.py` connects to the Puppet master's inventory web
+service to generate a list of known hosts which are managed by the Puppet
+master.  Puppet uses SSL certificate authentication to authenticate Puppet
+agents and other clients to the Puppet master's inventory service. By default,
+this script expects to run as root and thereby use the host-agent's private
+key and certificate and should *just* work when run that way.
+
+If Splunk is not running as root, other arrangements have to be made to allow
+the script to authenticate to the Puppet master's inventory web service, such
+as giving the Splunk user read access to the Puppet agent's private key and
+certificate, creating a separate certificate in ~splunk/.puppet and signing
+the resulting cert on the Puppet master, or setting up the command to run as
+password-less sudo. While these options seem doable, we have not explored
+them for feasibility.
 
 Also, the Puppet master must be configured to permit the Splunk server access
 to the `/facts` endpoint, with an entry in `/etc/puppet/auth.conf` such as:
