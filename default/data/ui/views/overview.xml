@@ -78,14 +78,14 @@
     <param name="groupLabel">Puppet Resources</param>
 
     <module name="SingleValue">
-      <param name="beforeLabel">Total Resources</param>
+      <param name="beforeLabel">Total Resources: </param>
       <param name="field">res_total_sum</param>
     </module>
 
     <module name="HiddenPostProcess" layoutPanel="panel_row2_col1_grp1">
       <param name="search">eval res_total_avg=round(res_total_avg)</param>
       <module name="SingleValue">
-        <param name="beforeLabel">Average Resources Per Host</param>
+        <param name="beforeLabel">Average Resources Per Host: </param>
         <param name="field">res_total_avg</param>
       </module>
     </module>
