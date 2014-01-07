@@ -34,6 +34,9 @@
   <module name="HiddenSavedSearch" layoutPanel="panel_row2_col2">
     <param name="autoRun">true</param>
     <param name="savedSearch">Puppet-Git: Recent Commits</param>
+    <module name="HiddenFieldPicker">
+      <param name="strictMode">true</param>
+      <param name="fields">_time Committer Subject</param>
     <module name="JobProgressIndicator">
       <module name="Paginator">
         <param name="entityName">events</param>
@@ -41,6 +44,7 @@
           <param name="displayRowNumbers">false</param>
         </module>
       </module>
+    </module>
     </module>
   </module>
 
