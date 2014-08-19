@@ -72,23 +72,6 @@
   </row>
   <row>
     <chart>
-      <searchName>Catalog Application Time (3d)</searchName>
-      <title>Catalog Application Time (3d)</title>
-      <option name="charting.axisTitleX.text">Time</option>
-      <option name="charting.axisTitleY.text">Seconds</option>
-      <option name="charting.chart">area</option>
-      <option name="charting.chart.nullValueMode">gaps</option>
-      <option name="charting.chart.showMarkers">false</option>
-      <option name="charting.chart.stackMode">default</option>
-      <option name="charting.layout.splitSeries">false</option>
-      <option name="charting.legend.placement">right</option>
-      <option name="charting.primaryAxisTitle.text"/>
-      <option name="charting.secondaryAxis.maximumNumber">""</option>
-      <option name="charting.secondaryAxis.minimumNumber">""</option>
-      <option name="charting.secondaryAxis.scale">""</option>
-      <option name="charting.secondaryAxisTitle.text"/>
-    </chart>
-    <chart>
       <searchName>Run-times by resource (all)</searchName>
       <title>Run-times by Resource</title>
       <option name="charting.chart">area</option>
